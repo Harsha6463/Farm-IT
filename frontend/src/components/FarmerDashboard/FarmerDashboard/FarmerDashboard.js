@@ -38,7 +38,7 @@ const FarmerDashboard = () => {
 
           {loading ? (
             <p className="loading-status">
-              <strong>Loading farms...</strong>
+              <b>Loading farms...</b>
             </p>
           ) : farms.length > 0 ? (
             <div className="farms-display-list">
@@ -52,20 +52,20 @@ const FarmerDashboard = () => {
                   <h2 className="farm-title">{farm.name}</h2>
                   <p className="farm-details">{farm.description}</p>
                   <p>
-                    <strong>Location:</strong> {farm.location}
+                    <b>Location:</b> {farm.location}
                   </p>
                   <p>
-                    <strong>Type:</strong> {farm.farmType}
+                    <b>Type:</b> {farm.farmType}
                   </p>
                   <p>
-                    <strong>Size:</strong> {farm.size} acres
+                    <b>Size:</b> {farm.size} acres
                   </p>
                   <p>
-                    <strong>Production Capacity:</strong>{" "}
+                    <b>Production Capacity:</b>{" "}
                     {farm.productionCapacity} tons
                   </p>
                   <p>
-                    <strong>Status:</strong> {farm.status}
+                    <b>Status:</b> {farm.status}
                   </p>
                   <Link to={`/loanRequest/${farm._id}`}>
                     <button className="request-loan-button">Request Loan</button>

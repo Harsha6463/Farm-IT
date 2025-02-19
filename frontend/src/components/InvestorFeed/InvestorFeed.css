@@ -69,7 +69,7 @@
 
 .invest-btn {
   padding: 0.5rem 1rem;
-  background-color: black;
+  background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
@@ -91,7 +91,8 @@
 }
 
 .issue-btn {
-  padding: 0.5rem 1rem;
+  padding: 10px ;
+  font-size: 1.2rem;
   background-color: #007bff;
   color: white;
   border: none;
@@ -100,6 +101,4 @@
   margin-top: 20px;
 }
 
-.issue-btn:hover {
-  background-color: #0056b3;
-}
+

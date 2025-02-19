@@ -56,7 +56,7 @@ const InvestorFeed = () => {
 
         {loading ? (
           <p className="loading-text">
-            <strong>Loading loan requests...</strong>
+            <b>Loading loan requests...</b>
           </p>
         ) : (
           <div className="loan-cards-container">
@@ -68,12 +68,12 @@ const InvestorFeed = () => {
                     alt="Farm Land Images"
                     className="loan-image"
                   />
-                  <h2 className="loan-status">Status: {loan.status}</h2>
+                  <h2  className="loan-status"><b>Status:</b> {loan.status}</h2>
                   <p>
-                    <strong>Amount:</strong> {loan.amount}
+                    <b>Amount:</b> {loan.amount}
                   </p>
                   <p>
-                    <strong>Requested Interest Rate:</strong>{" "}
+                    <b>Requested Interest Rate:</b>{" "}
                     {loan.interestRate}
                   </p>
                   <Link to="">

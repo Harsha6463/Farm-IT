@@ -35,7 +35,7 @@ const InvestorPanel = () => {
 
           {loading ? (
             <p className="loading-message-text">
-              <strong>Loading your investments...</strong>
+              <b>Loading your investments...</b>
             </p>
           ) : investments.length > 0 ? (
             <div className="investment-cards-container">
@@ -49,16 +49,16 @@ const InvestorPanel = () => {
                   <h2 className="investment-farm-title">{investment.farm.name}</h2>
                   <p className="investment-farm-description">{investment.farm.description}</p>
                   <p>
-                    <strong>Location:</strong> {investment.farm.location}
+                    <b>Location:</b> {investment.farm.location}
                   </p>
                   <p>
-                    <strong>Investment Amount:</strong> Rs:{investment.amount}
+                    <b>Investment Amount:</b> Rs:{investment.amount}
                   </p>
                   <p>
-                    <strong>Farmer:</strong> {investment.farm.farmer}
+                    <b>Farmer:</b> {investment.farm.farmer}
                   </p>
                   <p>
-                    <strong>Status:</strong> {investment.status}
+                    <b>Status:</b> {investment.status}
                   </p>
                 </div>
               ))}

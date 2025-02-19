@@ -10,6 +10,7 @@ import FarmerDashboard from "./components/FarmerDashboard/FarmerDashboard/Farmer
 import AddFarm from "./components/FarmerDashboard/AddFarm/AddFarm";
 import LoanRequest from "./components/FarmerDashboard/LoanRequest/LoanRequest";
 import Issue from "./components/IssuePage/Issue";
+import AdminDashboard from "./components/AdminPage/AdminDashboard";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/addFarm" element={<AddFarm />} />
           <Route path="/loanRequest/:farmId" element={<LoanRequest />} />
           <Route path="/issue/:userType" element={<Issue />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -34,6 +34,7 @@ const Navbar = ({ isInvestor }) => {
           </>
         )}
       </div>
+     
       <div className="nav-right">
         <button onClick={handleLogout} className="logout-btn">
           Logout
