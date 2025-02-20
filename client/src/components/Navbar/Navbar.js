@@ -19,7 +19,7 @@ const Navbar = ({ UserType }) => {
   return (
     <nav className="navigation-bar">
       <div className="nav-left">
-        <div className="brand-logo">FarmIT</div>
+        <div style={{fontSize:"3rem", color:"gold"}} className="brand-logo">FarmIT</div>
       </div>
       <div className="nav-center">
         {UserType === "investor" && (

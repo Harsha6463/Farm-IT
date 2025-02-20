@@ -41,7 +41,7 @@ const AdminUsersDashboard = () => {
       <Navbar UserType={"admin"} />
       <div className="admin-dashboard">
         <div className="dashboard-content">
-          <h1>Admin Users Dashboard</h1>
+          <h1  style={{marginTop:"100px"}}> Users Dashboard</h1>
           {loading ? (
             <p className="loading-message">
               <b>Loading users...</b>

@@ -1,7 +1,7 @@
 
 .add-farm-button,
 .request-loan-button {
-  padding: 0.5rem 1rem;
+  padding: 15px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -11,13 +11,11 @@
   text-decoration: none;
   display: inline-block;
   font-weight: 500;
-  font-size: 16px;
+width: 150px;
+font-size: 1.05rem;
 }
 
-.add-farm-button:hover,
-.request-loan-button:hover {
-  background-color: rgb(48, 48, 48);
-}
+
 
 .farmer-dashboard-container {
   display: flex;
@@ -47,7 +45,7 @@
 }
 
 .farm-item-card {
-  background: white;
+  background: cornsilk;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
@@ -71,11 +69,7 @@
   margin-bottom: 5px;
 }
 
-.farm-details {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-}
+
 
 .farm-item-card p {
   margin: 5px 0;
@@ -98,16 +92,16 @@
 
 .report-issue-button {
   padding: 0.5rem 1rem;
-  background-color: black;
+  background-color: red;
   color: white;
   border: none;
+  width: 100px;
   cursor: pointer;
   border-radius: 4px;
   margin-top: 10px;
   text-decoration: none;
   display: inline-block;
-  font-weight: 500;
-  font-size: 16px;
+ font-size: 1.3rem;
   position: fixed;
   right: 40px;
   bottom: 30px;

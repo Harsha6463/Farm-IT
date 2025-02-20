@@ -82,7 +82,7 @@
 
 .report-issue-btn {
   padding: 0.5rem 1rem;
-  background-color: black;
+  background-color: red;
   color: white;
   border: none;
   cursor: pointer;

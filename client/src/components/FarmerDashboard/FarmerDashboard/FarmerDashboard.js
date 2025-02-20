@@ -48,23 +48,23 @@ const FarmerDashboard = () => {
                     alt="Farm Land"
                     className="farm-thumbnail"
                   />
-                  <h2 className="farm-title">{farm.name}</h2>
-                  <p className="farm-details">{farm.description}</p>
+                  <h2 className="farm-title"><b>Name: </b> {farm.name}</h2>
+                  <p className="farm-details"><b>Description: </b>{farm.description}</p>
                   <p>
-                    <b>Location:</b> {farm.location}
+                    
                   </p>
                   <p>
-                    <b>Type:</b> {farm.farmType}
+                    <b>Type: </b> {farm.farmType}
                   </p>
                   <p>
-                    <b>Size:</b> {farm.size} acres
+                    <b>Size: </b> {farm.size} acres
                   </p>
                   <p>
-                    <b>Production Capacity:</b>{" "}
+                    <b>Production Capacity: </b>{" "}
                     {farm.productionCapacity} tons
                   </p>
                   <p>
-                    <b>Status:</b> {farm.status}
+                    <b>Status: </b> {farm.status}
                   </p>
                   <Link to={`/loanRequest/${farm._id}`}>
                     <button className="request-loan-button">Request Loan</button>

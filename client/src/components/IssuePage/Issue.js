@@ -12,6 +12,7 @@ const Issue = () => {
     issueDiscription: "",
   });
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   const handleChange = (e) => {
     setIssueData({ ...issueData, [e.target.name]: e.target.value });
@@ -19,10 +20,13 @@ const Issue = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await API.post("/issue/add-issue", {
+      const response = await API.post("/issue/add-issue", {
         ...issueData,
+        userId,
       });
+      console.log(response)
       toast.success("Issue submitted successfully!");
       if (userType === "investor") navigate("/investorDashboard");
       else if (userType === "farmer") navigate("/farmerDashboard");
@@ -36,8 +40,8 @@ const Issue = () => {
   return (
     <>
       <Navbar isInvestor={userType === "investor"} />
-      <div className="report-issue-container">
-        <h2 className="report-issue-title">Report an Issue</h2>
+      <div style={{marginTop:"100px"}} className="report-issue-container">
+        <h2  className="report-issue-title">Report an Issue</h2>
         <form className="issue-report-form" onSubmit={handleSubmit}>
           <input
             type="text"

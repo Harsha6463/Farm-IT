@@ -49,9 +49,9 @@
   color: whitesmoke;
   border: none;
   cursor: pointer;
+  width: 100px;
+  font-size: 1.3rem;
   border-radius: 4px;
-  font-weight: 550;
-  font-size: 16px;
   position: relative;
   right: 60px;
   transition: background-color 0.3s ease;
