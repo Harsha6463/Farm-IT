@@ -1,24 +1,12 @@
-.admin-dashboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+.farm-cards-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
 }
 
-.dashboard-content {
-  width: 80%;
-  max-width: 1200px;
-}
-
-.farm-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
-}
-
-.farm-card {
-  background: white;
+.farm-item-card {
+  background: cornsilk;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
@@ -28,11 +16,11 @@
   text-align: left;
 }
 
-.farm-card:hover {
+.farm-item-card:hover {
   transform: scale(1.02);
 }
 
-.farm-image {
+.farm-card-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -40,8 +28,8 @@
   border: 1px solid #ddd;
 }
 
-.loading-message,
-.no-farms {
+.loading-text,
+.no-farm-data {
   font-size: 18px;
   color: #888;
   text-align: center;

@@ -1,23 +1,23 @@
-.admin-dashboard {
+.admin-issues-dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 }
 
-.dashboard-content {
+.issues-dashboard-content {
   width: 80%;
   max-width: 1200px;
 }
 
-.issue-list {
+.issues-cards-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 20px;
 }
 
-.issue-card {
+.issue-item-card {
   background: cornsilk;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -28,12 +28,12 @@
   text-align: left;
 }
 
-.issue-card:hover {
+.issue-item-card:hover {
   transform: scale(1.02);
 }
 
-.loading-message,
-.no-issues {
+.loading-text,
+.no-issue-data {
   font-size: 18px;
   color: #888;
   text-align: center;

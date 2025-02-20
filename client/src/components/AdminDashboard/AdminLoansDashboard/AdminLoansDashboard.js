@@ -31,24 +31,24 @@ const AdminLoansDashboard = () => {
           <h1>Admin Loans Dashboard</h1>
           {loading ? (
             <p className="loading-message">
-              <b>Loading loans...</b>
+              <strong>Loading loans...</strong>
             </p>
           ) : loans.length > 0 ? (
             <div className="loan-list">
               {loans.map((loan) => (
                 <div key={loan._id} className="loan-card">
-                  <h2>Farm: {loan.farm.name}</h2>
+                  <h2>Farm: {loan.farm ? loan.farm.name : "No farm name available"}</h2>
                   <p>
-                    <b>Amount:</b> Rs {loan.amount}
+                    <strong>Amount:</strong> Rs {loan.amount}
                   </p>
                   <p>
-                    <b>Interest Rate:</b> {loan.interestRate}%
+                    <strong>Interest Rate:</strong> {loan.interestRate}%
                   </p>
                   <p>
-                    <b>Duration:</b> {loan.duration} months
+                    <strong>Duration:</strong> {loan.duration} months
                   </p>
                   <p>
-                    <b>Status:</b> {loan.status}
+                    <strong>Status:</strong> {loan.status}
                   </p>
                 </div>
               ))}

@@ -26,17 +26,17 @@ const AdminIssuesDashboard = () => {
   return (
     <>
       <Navbar UserType={"admin"} />
-      <div className="admin-dashboard">
-        <div className="dashboard-content">
+      <div className="admin-issues-dashboard">
+        <div className="issues-dashboard-content">
           <h1>Admin Issues Dashboard</h1>
           {loading ? (
-            <p className="loading-message">
+            <p className="loading-text">
               <b>Loading issues...</b>
             </p>
           ) : issues.length > 0 ? (
-            <div className="issue-list">
+            <div className="issues-cards-list">
               {issues.map((issue) => (
-                <div key={issue._id} className="issue-card">
+                <div key={issue._id} className="issue-item-card">
                   <h2>{issue.issueTitle}</h2>
                   <p>
                     <b>Reported By:</b> {issue.user.firstName}{" "}
@@ -53,7 +53,7 @@ const AdminIssuesDashboard = () => {
               ))}
             </div>
           ) : (
-            <p className="no-issues">No issues reported.</p>
+            <p className="no-issue-data">No issues reported.</p>
           )}
         </div>
       </div>

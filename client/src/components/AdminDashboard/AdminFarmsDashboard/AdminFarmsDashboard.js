@@ -26,21 +26,21 @@ const AdminFarmsDashboard = () => {
   return (
     <>
       <Navbar UserType={"admin"} />
-      <div className="admin-dashboard">
-        <div className="dashboard-content">
+      <div className="admin-farm-dashboard">
+        <div className="farm-dashboard-content">
           <h1>Admin Farms Dashboard</h1>
           {loading ? (
-            <p className="loading-message">
+            <p className="loading-text">
               <b>Loading farms...</b>
             </p>
           ) : farms.length > 0 ? (
-            <div className="farm-list">
+            <div className="farm-cards-list">
               {farms.map((farm) => (
-                <div key={farm._id} className="farm-card">
+                <div key={farm._id} className="farm-item-card">
                   <img
                     src={`http://localhost:3600/${farm.images[0]}`}
                     alt="Farm"
-                    className="farm-image"
+                    className="farm-card-image"
                   />
                   <h2>{farm.name}</h2>
                   <p>
@@ -63,7 +63,7 @@ const AdminFarmsDashboard = () => {
               ))}
             </div>
           ) : (
-            <p className="no-farms">No farms found.</p>
+            <p className="no-farm-data">No farms found.</p>
           )}
         </div>
       </div>
