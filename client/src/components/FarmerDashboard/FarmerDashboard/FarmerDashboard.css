@@ -60,7 +60,7 @@
 }
 
 .farm-item-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .farm-title {
@@ -108,7 +108,7 @@
   font-weight: 500;
   font-size: 16px;
   position: fixed;
-  right: 35px;
+  right: 40px;
   bottom: 30px;
 }
 

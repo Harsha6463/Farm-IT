@@ -41,7 +41,7 @@ const InvestorFeed = () => {
       navigate("/investorDashboard");
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Error submitting loan request"
+        error.response?.data?.message || "Error while submitting loan request"
       );
     }
   };

@@ -35,10 +35,9 @@ const FarmerDashboard = () => {
               <button className="add-farm-button">Add Farm Land</button>
             </Link>
           </div>
-
           {loading ? (
             <p className="loading-status">
-              <b>Loading farms...</b>
+              <b>Loading Farms...</b>
             </p>
           ) : farms.length > 0 ? (
             <div className="farms-display-list">

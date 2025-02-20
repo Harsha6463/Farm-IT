@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
+
 }
 
 .dashboard-inner-content {
@@ -69,7 +69,7 @@
 
 .investment-card-image {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -81,16 +81,19 @@
 }
 
 .report-issue-btn {
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   background-color: black;
   color: white;
   border: none;
-  border-radius: 5px;
-  margin: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 18px;
+  position: fixed;
+  right: 15px;
+  bottom: 30px;
   transition: background 0.3s ease;
-}
-
-.report-issue-btn:hover {
-  background-color: rgb(48, 48, 48);
 }

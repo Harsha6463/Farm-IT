@@ -30,12 +30,12 @@ const InvestorPanel = () => {
       <div className="investor-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-heading">
-            <h1>Investor Panel</h1>
+            <h1>Investors Dashboard</h1>
           </div>
 
           {loading ? (
             <p className="loading-message-text">
-              <b>Loading your investments...</b>
+              <b>Loading your Investments...</b>
             </p>
           ) : investments.length > 0 ? (
             <div className="investment-cards-container">

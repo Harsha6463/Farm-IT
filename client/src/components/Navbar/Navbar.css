@@ -39,8 +39,8 @@
 
 .logout-btn {
   padding: 0.5rem 1rem;
-  background-color: #f44336;
-  color: white;
+  background-color: #f80303;
+  color: whitesmoke;
   border: none;
   cursor: pointer;
   border-radius: 4px;
@@ -49,6 +49,3 @@
   transition: background-color 0.3s ease;
 }
 
-.logout-btn:hover {
-  background-color: #d32f2f;
-}
