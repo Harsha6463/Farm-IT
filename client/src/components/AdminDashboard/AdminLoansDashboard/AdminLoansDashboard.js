@@ -31,7 +31,7 @@ const AdminLoansDashboard = () => {
           <h1>Admin Loans Dashboard</h1>
           {loading ? (
             <p className="loading-message">
-              <strong>Loading loans...</strong>
+              <b>Loading loans...</b>
             </p>
           ) : loans.length > 0 ? (
             <div className="loan-list">
@@ -39,16 +39,16 @@ const AdminLoansDashboard = () => {
                 <div key={loan._id} className="loan-card">
                   <h2>Farm: {loan.farm ? loan.farm.name : "No farm name available"}</h2>
                   <p>
-                    <strong>Amount:</strong> Rs {loan.amount}
+                    <b>Amount:</b> Rs {loan.amount}
                   </p>
                   <p>
-                    <strong>Interest Rate:</strong> {loan.interestRate}%
+                    <b>Interest Rate:</b> {loan.interestRate}%
                   </p>
                   <p>
-                    <strong>Duration:</strong> {loan.duration} months
+                    <b>Duration:</b> {loan.duration} months
                   </p>
                   <p>
-                    <strong>Status:</strong> {loan.status}
+                    <b>Status:</b> {loan.status}
                   </p>
                 </div>
               ))}

@@ -5,7 +5,6 @@ import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./components/HomePage/HomePage";
 import InvestorFeed from "./components/InvestorFeed/InvestorFeed";
-import InvestorDashboard from "./components/InvestorDashboard/InvestorDashboard";
 import FarmerDashboard from "./components/FarmerDashboard/FarmerDashboard/FarmerDashboard";
 import AddFarm from "./components/FarmerDashboard/AddFarm/AddFarm";
 import LoanRequest from "./components/FarmerDashboard/LoanRequest/LoanRequest";
@@ -14,6 +13,8 @@ import AdminUsersDashboard from "./components/AdminDashboard/AdminUsersDashboard
 import AdminLoansDashboard from "./components/AdminDashboard/AdminLoansDashboard/AdminLoansDashboard";
 import AdminFarmsDashboard from "./components/AdminDashboard/AdminFarmsDashboard/AdminFarmsDashboard";
 import AdminIssuesDashboard from "./components/AdminDashboard/AdminIssuesDashboard/AdminIssuesDashboard";
+import InvestorPanel from "./components/InvestorDashboard/InvestorPanel";
+
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/investorFeed" element={<InvestorFeed />} />
-          <Route path="/investorDashboard" element={<InvestorDashboard />} />
+          <Route path="/investorDashboard" element={<InvestorPanel />} />
           <Route path="/farmerDashboard" element={<FarmerDashboard />} />
           <Route path="/addFarm" element={<AddFarm />} />
           <Route path="/loanRequest/:farmId" element={<LoanRequest />} />

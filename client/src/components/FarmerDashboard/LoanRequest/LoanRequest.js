@@ -39,9 +39,9 @@ const LoanRequest = () => {
   return (
     <>
       <Navbar isInvestor={false} />
-      <div className="loan-request-form-container">
+      <div style={{marginTop:"200px"}} className="loan-request-form-container">
         <h2>Request a Loan</h2>
-        <form onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit}>
           <input
             type="number"
             name="amount"

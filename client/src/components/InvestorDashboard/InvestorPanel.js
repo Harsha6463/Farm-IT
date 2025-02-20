@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./InvestorDashboard.css"; 
+import "./InvestorDashboard.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import API from "../../API";
@@ -26,11 +26,11 @@ const InvestorPanel = () => {
 
   return (
     <>
-      <Navbar isInvestor={true} />
+ <Navbar UserType={"investor"} />
       <div className="investor-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-heading">
-            <h1>Investors Dashboard</h1>
+            <h1>Investor Dashboard</h1>
           </div>
 
           {loading ? (
@@ -42,20 +42,26 @@ const InvestorPanel = () => {
               {investments.map((investment) => (
                 <div key={investment._id} className="investment-card-item">
                   <img
-                    src={`http://localhost:3600/${investment.farm.images[0]}`}
+                    src={
+                      investment.farm?.images?.[0] 
+                        ? `http://localhost:3600/${investment.farm.images[0]}`
+                    : "default-image.jpg" 
+                    }
                     alt="Farm Land"
                     className="investment-card-image"
                   />
-                  <h2 className="investment-farm-title">{investment.farm.name}</h2>
-                  <p className="investment-farm-description">{investment.farm.description}</p>
+                  <h2 className="investment-farm-title">{investment.farm?.name}</h2>
+                  <p className="investment-farm-description">
+                    {investment.farm?.description}
+                  </p>
                   <p>
-                    <b>Location:</b> {investment.farm.location}
+                    <b>Location:</b> {investment.farm?.location}
                   </p>
                   <p>
                     <b>Investment Amount:</b> Rs:{investment.amount}
                   </p>
                   <p>
-                    <b>Farmer:</b> {investment.farm.farmer}
+                    <b>Farmer:</b> {investment.farm?.farmer}
                   </p>
                   <p>
                     <b>Status:</b> {investment.status}

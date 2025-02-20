@@ -19,7 +19,7 @@ const InvestorFeed = () => {
       setLoans(response.data.loans);
       setInvestorId(response.data.investorId);
     } catch (error) {
-      console.error("Error fetching loans:", error);
+      console.error("Error fetching farms:", error);
     } finally {
       setLoading(false);
     }
@@ -41,14 +41,14 @@ const InvestorFeed = () => {
       navigate("/investorDashboard");
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Error while submitting loan request"
+        error.response?.data?.message || "Error submitting loan request"
       );
     }
   };
 
   return (
     <>
-      <Navbar isInvestor={true} />
+      <Navbar UserType={"investor"} />
       <div className="investor-container">
         <div className="header-section">
           <h1>Investor Feed</h1>
@@ -64,17 +64,19 @@ const InvestorFeed = () => {
               loans.map((loan) => (
                 <div key={loan._id} className="loan-card">
                   <img
-                    src={`http://localhost:3600/${loan.farm.images}`}
+                    src={`http://localhost:3600/${loan.farm?.images || "default-image.jpg"}`} // Handle missing images
                     alt="Farm Land Images"
                     className="loan-image"
                   />
-                  <h2  className="loan-status"><b>Status:</b> {loan.status}</h2>
+                  <h2 className="loan-status"><b>Status:</b> {loan.status}</h2>
                   <p>
                     <b>Amount:</b> {loan.amount}
                   </p>
                   <p>
-                    <b>Requested Interest Rate:</b>{" "}
-                    {loan.interestRate}
+                    <b>Requested Interest Rate:</b> {loan.interestRate}
+                  </p>
+                  <p>
+                    <b>Duration:</b> {loan.duration}
                   </p>
                   <Link to="">
                     <button
@@ -87,13 +89,13 @@ const InvestorFeed = () => {
                         )
                       }
                     >
-                      Interested
+                      Accept Loan
                     </button>
                   </Link>
                 </div>
               ))
             ) : (
-              <h3 style={{color:"white"}} className="no-loans-message">No loans available to fund.</h3>
+              <h3 className="no-loans-message">No loans available to fund.</h3>
             )}
           </div>
         )}

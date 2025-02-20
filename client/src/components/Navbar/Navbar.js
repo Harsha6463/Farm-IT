@@ -29,7 +29,7 @@ const Navbar = ({ UserType }) => {
               className="nav-item"
               style={({ isActive }) => activeNavLink(isActive)}
             >
-              Feed
+               Available Loans
             </NavLink>
             <NavLink
               to="/investorDashboard"

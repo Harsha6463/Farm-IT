@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await API.post("/auth/login", formData);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);  
       toast.success("Login successful!");
       if (data.role === "investor") navigate("/investorFeed");
       else if (data.role === "farmer") navigate("/farmerDashboard");
