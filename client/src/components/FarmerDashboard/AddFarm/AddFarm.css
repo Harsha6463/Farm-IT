@@ -7,10 +7,12 @@
   border-radius: 5px;
   margin: 20px auto;
   width: 700px;
+  background-color: #f0f8ff;
 }
 
 .farm-form-container h2 {
   margin-bottom: 20px;
+  color: #333;
 }
 
 .farm-form-container form {
@@ -26,14 +28,17 @@
   border-radius: 5px;
   width: 680px;
   color: black;
+  background-color: #ffffff;
 }
 
-.farm-form-container input:focus {
+.farm-form-container input:focus,
+.farm-form-container textarea:focus {
   border: 2px solid rgb(38, 38, 38);
 }
 
-.farm-form-container input::placeholder {
-  color: black;
+.farm-form-container input::placeholder,
+.farm-form-container textarea::placeholder {
+  color: #808080;
 }
 
 .farm-form-container button {
@@ -50,31 +55,31 @@
 }
 
 .farm-form-container .file-upload {
-  width: 700px; 
-  padding: 10px; 
-  border: 1px solid #ccc; 
-  border-radius: 5px; 
-  color: black; 
+  width: 700px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: black;
 }
 
 .file-upload:focus {
-  border: 2px solid rgb(38, 38, 38); 
+  border: 2px solid rgb(38, 38, 38);
 }
 
 .file-upload option {
-  color: black; 
+  color: black;
 }
 
 .file-upload option:disabled {
-  color: grey; 
+  color: grey;
 }
 
 .file-upload {
-  background: rgba(255, 255, 255, 0.08); 
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .file-upload option:first-child {
-  color: grey; 
+  color: grey;
 }
 
 .file-upload option:first-child:disabled {

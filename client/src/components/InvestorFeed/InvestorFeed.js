@@ -93,7 +93,7 @@ const InvestorFeed = () => {
                 </div>
               ))
             ) : (
-              <p className="no-loans-message">No loans available to fund.</p>
+              <h3 style={{color:"white"}} className="no-loans-message">No loans available to fund.</h3>
             )}
           </div>
         )}

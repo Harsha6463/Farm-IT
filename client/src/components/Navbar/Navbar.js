@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = ({ isInvestor }) => {
+const Navbar = ({ UserType }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -10,31 +10,78 @@ const Navbar = ({ isInvestor }) => {
     navigate("/login");
   };
 
+  const activeNavLink = (isActive) => ({
+    backgroundColor: isActive ? "crimson" : "transparent",
+    color: "white",
+    borderRadius: isActive ? "6px" : "none",
+  });
+
   return (
     <nav className="navigation-bar">
       <div className="nav-left">
         <div className="brand-logo">FarmIT</div>
       </div>
       <div className="nav-center">
-        {isInvestor && (
+        {UserType === "investor" && (
           <>
-            <Link to="/investorFeed" className="nav-item">
+            <NavLink
+              to="/investorFeed"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
               Feed
-            </Link>
-            <Link to="/investorDashboard" className="nav-item">
+            </NavLink>
+            <NavLink
+              to="/investorDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
               Dashboard
-            </Link>
+            </NavLink>
           </>
         )}
-        {!isInvestor && (
+        {UserType === "farmer" && (
+          <NavLink
+            to="/farmerDashboard"
+            className="nav-item"
+            style={({ isActive }) => activeNavLink(isActive)}
+          >
+            Dashboard
+          </NavLink>
+        )}
+        {UserType === "admin" && (
           <>
-            <Link to="/farmerDashboard" className="nav-item">
-              Dashboard
-            </Link>
+            <NavLink
+              to="/adminUsersDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Users
+            </NavLink>
+            <NavLink
+              to="/adminFarmsDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Farms
+            </NavLink>
+            <NavLink
+              to="/adminLoansDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Loans
+            </NavLink>
+            <NavLink
+              to="/adminIssuesDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Issues
+            </NavLink>
           </>
         )}
       </div>
-     
       <div className="nav-right">
         <button onClick={handleLogout} className="logout-btn">
           Logout

@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #007bff;
+  background-color: black;
 }
 
 .nav-left,
@@ -27,7 +27,8 @@
   font-size: 1.3rem;
   padding: 10px;
   margin-inline: 20px;
-  border: 1px solid #007bff;
+  border: 1px solid black
+  ;
 }
 
 .nav-item:hover {
@@ -48,4 +49,7 @@
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
+
+
+
 
