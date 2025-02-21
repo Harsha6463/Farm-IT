@@ -19,7 +19,7 @@ router.get('/tracking', [auth, checkRole(['investor'])], async (req, res) => {
       if (investment) {
         acc.totalInvested += investment.amount;
         
-        // Calculate returns based on paid repayments
+       
         const investorShare = investment.amount / loan.amount;
         const returns = loan.repaymentSchedule
           .filter(payment => payment.status === 'paid')

@@ -26,7 +26,7 @@ const FarmerDashboard = () => {
 
   return (
     <>
-      <Navbar isInvestor={false} />
+      <Navbar UserType="farmer" />
       <div className="farmer-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-header-section">

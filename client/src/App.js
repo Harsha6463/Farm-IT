@@ -14,6 +14,8 @@ import AdminLoansDashboard from "./components/AdminDashboard/AdminLoansDashboard
 import AdminFarmsDashboard from "./components/AdminDashboard/AdminFarmsDashboard/AdminFarmsDashboard";
 import AdminIssuesDashboard from "./components/AdminDashboard/AdminIssuesDashboard/AdminIssuesDashboard";
 import InvestorPanel from "./components/InvestorDashboard/InvestorPanel";
+import MyLoan from "./components/Myloans/MyLoan";
+
 
 
 
@@ -32,6 +34,10 @@ function App() {
           <Route path="/addFarm" element={<AddFarm />} />
           <Route path="/loanRequest/:farmId" element={<LoanRequest />} />
           <Route path="/issue/:userType" element={<Issue />} />
+          <Route path="/loanRequest/:farmId" element={<LoanRequest />} />
+          <Route path="/my-loans" element={<MyLoan />} />
+          
+        
           <Route
             path="/adminUsersDashboard"
             element={<AdminUsersDashboard />}

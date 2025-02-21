@@ -19,9 +19,30 @@ const Navbar = ({ UserType }) => {
   return (
     <nav className="navigation-bar">
       <div className="nav-left">
-        <div style={{fontSize:"3rem", color:"gold"}} className="brand-logo">FarmIT</div>
+        <div style={{ fontSize: "3rem", color: "gold" }} className="brand-logo">
+          FarmIT
+        </div>
       </div>
       <div className="nav-center">
+
+           {UserType === "farmer" && (
+          <>
+            <NavLink
+              to="/farmerDashboard"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              to="/my-loans"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              My-Loans
+            </NavLink>
+          </>
+        )}
         {UserType === "investor" && (
           <>
             <NavLink
@@ -29,7 +50,7 @@ const Navbar = ({ UserType }) => {
               className="nav-item"
               style={({ isActive }) => activeNavLink(isActive)}
             >
-               Available Loans
+              Available Loans
             </NavLink>
             <NavLink
               to="/investorDashboard"
@@ -38,17 +59,10 @@ const Navbar = ({ UserType }) => {
             >
               Dashboard
             </NavLink>
+
           </>
         )}
-        {UserType === "farmer" && (
-          <NavLink
-            to="/farmerDashboard"
-            className="nav-item"
-            style={({ isActive }) => activeNavLink(isActive)}
-          >
-            Dashboard
-          </NavLink>
-        )}
+     
         {UserType === "admin" && (
           <>
             <NavLink
