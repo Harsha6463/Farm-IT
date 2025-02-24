@@ -24,8 +24,7 @@ const Navbar = ({ UserType }) => {
         </div>
       </div>
       <div className="nav-center">
-
-           {UserType === "farmer" && (
+        {UserType === "farmer" && (
           <>
             <NavLink
               to="/farmerDashboard"
@@ -40,6 +39,20 @@ const Navbar = ({ UserType }) => {
               style={({ isActive }) => activeNavLink(isActive)}
             >
               My-Loans
+            </NavLink>
+            <NavLink
+              to="/userTransactions"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Transactions
+            </NavLink>
+            <NavLink
+              to="/userissues"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Issues
             </NavLink>
           </>
         )}
@@ -59,10 +72,22 @@ const Navbar = ({ UserType }) => {
             >
               Dashboard
             </NavLink>
-
+            <NavLink
+              to="/investorTracking"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Tracking
+            </NavLink>
+            <NavLink
+              to="/userissues"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Issues
+            </NavLink>
           </>
         )}
-     
         {UserType === "admin" && (
           <>
             <NavLink

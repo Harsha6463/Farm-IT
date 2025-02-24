@@ -46,4 +46,20 @@ router.get(
   }
 );
 
+router.get(
+  "/user-issues",
+  [auth, checkRole(["farmer", "investor"])],
+  async (req, res) => {
+    try {
+      const issues = await Issue.find({ user: req.user.userId }).populate(
+        "user"
+      );
+      res.json({ issues, role: req.user.role });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
+);
+
 export default router;
