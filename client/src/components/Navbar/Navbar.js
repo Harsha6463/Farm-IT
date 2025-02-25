@@ -20,7 +20,7 @@ const Navbar = ({ UserType }) => {
     <nav className="navigation-bar">
       <div className="nav-left">
         <div style={{ fontSize: "3rem", color: "gold" }} className="brand-logo">
-          FarmIT
+          FARM IT
         </div>
       </div>
       <div className="nav-center">
@@ -54,6 +54,7 @@ const Navbar = ({ UserType }) => {
             >
               Issues
             </NavLink>
+            
           </>
         )}
         {UserType === "investor" && (

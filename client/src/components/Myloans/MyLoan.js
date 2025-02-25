@@ -1,68 +1,83 @@
-// MyLoans.js
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Navbar from "../Navbar/Navbar";
 import API from "../../API";
 import { toast } from "react-toastify";
-import Navbar from "../Navbar/Navbar";
+import { Link } from "react-router-dom";
 import "./MyLoan.css";
 
-const MyLoan = () => {
+const FarmerLoan = () => {
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const userId = localStorage.getItem("userId");
+  const fetchLoans = async () => {
+    setLoading(true);
+    try {
+      const response = await API.get("/loans/my-loans");
+      setLoans(response.data);
+    } catch (error) {
+      console.error("Error fetching loans:", error);
+      toast.error("Failed to load loans");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchLoans = async () => {
-      try {
-        const response = await API.get("/loans/my-loans", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        setLoans(response.data);
-        setLoading(false);
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Error fetching loans");
-        setLoading(false);
-      }
-    };
-
     fetchLoans();
-  }, [userId]);
-
-  if (loading) {
-    return <div>Loading loans...</div>;
-  }
+  }, []);
 
   return (
     <>
       <Navbar UserType={"farmer"} />
-      <div style={{ marginTop: "100px" }} className="loans-container">
-        <h2 className="loans-title">My Loans</h2>
-        {loans.length > 0 ? (
-          <div className="loans-list">
-            {loans.map((loan) => (
-              <div className="loan-item" key={loan._id}>
-                <p><strong>Farm:</strong> {loan.farm.name}</p>
-                <p><strong>Loan Amount:</strong> ${loan.amount}</p>
-                <p><strong>Interest Rate:</strong> {loan.interestRate}%</p>
-                <p><strong>Investors:</strong> 
-                  {loan.investors.map((investor) => (
-                    <span key={investor.investor._id}>
-                      {investor.investor.firstName} {investor.investor.lastName}
-                    </span>
-                  ))}
-                </p>
-                <p><strong>Status:</strong> {loan.status}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No loans found.</p>
-        )}
+      <div className="farmer-loans">
+        <div className="dashboard-content">
+          <h1>My Loans</h1>
+          {loading ? (
+            <p className="loading-message">Loading loans...</p>
+          ) : loans.length > 0 ? (
+            <div className="loan-list">
+              {loans.map((loan) => (
+                <div key={loan._id} className="loan-card">
+                  <h2>Farm: {loan.farm.name}</h2>
+                  <p>
+                    <strong>Amount:</strong> Rs {loan.amount}
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {loan.status}
+                  </p>
+                  <p>
+                    <strong>Repayment Schedule:</strong>
+                  </p>
+                  <ul>
+                    {loan.repaymentSchedule.map((payment, index) => (
+                      <li key={index}>
+                        <h3>
+                          {new Date(payment.dueDate).toLocaleDateString()} - (
+                          {payment.status})
+                        </h3>
+                        <strong>
+                          {" "}
+                          Rs:{" "}
+                          <span className="payment-amount">
+                            {payment.amount}
+                          </span>
+                        </strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-loans">No loans found.</p>
+          )}
+        </div>
       </div>
+      <Link to={`/issue/farmer`}>
+        <button className="add-issue-btn">Issue?</button>
+      </Link>
     </>
   );
 };
 
-export default MyLoan;
+export default FarmerLoan;
