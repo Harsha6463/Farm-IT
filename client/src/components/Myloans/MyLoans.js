@@ -3,9 +3,9 @@ import Navbar from "../Navbar/Navbar";
 import API from "../../API";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "./MyLoan.css";
+import "./MyLoans.css";
 
-const FarmerLoan = () => {
+const MyLoans = () => {
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -80,4 +80,4 @@ const FarmerLoan = () => {
   );
 };
 
-export default FarmerLoan;
+export default MyLoans;

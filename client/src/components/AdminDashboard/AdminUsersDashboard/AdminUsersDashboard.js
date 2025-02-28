@@ -32,7 +32,7 @@ const AdminUsersDashboard = () => {
         )
       );
     } catch (error) {
-      console.error("Error verifying user:", error);
+      console.error("Error while verifying user:", error);
     }
   };
 
@@ -41,7 +41,7 @@ const AdminUsersDashboard = () => {
       <Navbar UserType={"admin"} />
       <div className="admin-dashboard">
         <div className="dashboard-content">
-          <h1  style={{marginTop:"100px"}}> Users Dashboard</h1>
+          <h1 style={{ marginTop: "100px" }}>Users Dashboard</h1>
           {loading ? (
             <p className="loading-message">
               <b>Loading users...</b>
@@ -49,7 +49,13 @@ const AdminUsersDashboard = () => {
           ) : users.length > 0 ? (
             <div className="user-list">
               {users.map((user) => (
-                <div key={user._id} className="user-card">
+                <div
+                  key={user._id}
+                  className="user-card"
+                  style={{
+                    backgroundColor: user.isVerified ? "#e0ffa3" : "cornsilk", 
+                  }}
+                >
                   <h2>
                     {user.firstName} {user.lastName}
                   </h2>

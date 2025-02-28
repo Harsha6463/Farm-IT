@@ -1,0 +1,97 @@
+.farmer-loans {
+    padding: 20px;
+    margin: 0 auto;
+  }
+  
+  .dashboard-content {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .loading-message {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .loan-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center; 
+  }
+  
+  .loan-card {
+    background-color:cornsilk;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 20px); 
+    box-sizing: border-box; 
+  }
+  
+  .loan-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .loan-card p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+  
+  .loan-card b {
+    color: #333;
+  }
+  
+  .loan-card ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+ 
+  .loan-card .payment-amount {
+    color: #ff5722;
+    font-weight: bold;
+  }
+  
+  .repay-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .repay-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .no-loans {
+    font-size: 1.2rem;
+    color: #777;
+  }
+  
+  .add-issue-btn {
+    padding: 0.5rem 1rem;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+  }
+  

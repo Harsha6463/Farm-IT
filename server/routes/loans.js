@@ -7,15 +7,18 @@ import Transaction from "../models/Transaction.js";
 
 router.get("/my-loans", auth, async (req, res) => {
   try {
-    const loans = await Loan.find({ "farm.farmer": req.user.userId })
+    const loans = await Loan.find()
       .populate("farm")
       .populate("investors.investor");
+
     res.json(loans);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
 
 router.get(
   "/my-investments",
@@ -135,32 +138,32 @@ router.post(
 router.post("/:id/repay", [auth, checkRole(["farmer"])], async (req, res) => {
   try {
     const { amount, fromUserId, toUserId } = req.body;
+ 
     const loan = await Loan.findById(req.params.id).populate("farm");
-
+    console.log(loan)
     const transaction = new Transaction({
       type: "repayment",
       amount: amount,
-      loan: loan,
+      loan: loan._id,
       from: fromUserId,
       to: toUserId,
     });
-
+console.log(transaction)
     await transaction.save();
 
     if (!loan) {
       return res.status(404).json({ message: "Loan not found" });
     }
 
-    if (loan.farm.farmer.toString() !== req.user.userId) {
-      return res.status(403).json({ message: "Not authorized" });
-    }
+   
 
-    const unpaidPayment = loan.repaymentSchedule.find(
+    const unpaidPayment = loan.repaymentSchedule.find( 
       (p) => p.status === "pending"
     );
     if (!unpaidPayment) {
       return res.status(400).json({ message: "No pending payments found" });
     }
+
 
     if (amount !== unpaidPayment.amount) {
       return res
@@ -175,6 +178,9 @@ router.post("/:id/repay", [auth, checkRole(["farmer"])], async (req, res) => {
       loan.status = "completed";
     }
 
+
+    console.log(allPaid)
+
     await loan.save();
 
     res.json({
@@ -187,6 +193,7 @@ router.post("/:id/repay", [auth, checkRole(["farmer"])], async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 router.get("/:id/schedule", auth, async (req, res) => {
   try {
