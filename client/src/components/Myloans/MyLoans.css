@@ -78,8 +78,7 @@
     font-size: 1.2rem;
     color: #777;
   }
-  
-  .add-issue-btn {
+  .issue-btn {
     padding: 0.5rem 1rem;
     background-color: red;
     color: white;

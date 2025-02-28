@@ -137,8 +137,9 @@ router.post(
 
 router.post("/:id/repay", [auth, checkRole(["farmer"])], async (req, res) => {
   try {
-    const { amount, fromUserId, toUserId } = req.body;
- 
+    const { amount, toUserId } = req.body;
+    console.log(req.user)
+ const fromUserId=req.user.userId
     const loan = await Loan.findById(req.params.id).populate("farm");
     console.log(loan)
     const transaction = new Transaction({
@@ -193,6 +194,8 @@ console.log(transaction)
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
 
 
 router.get("/:id/schedule", auth, async (req, res) => {

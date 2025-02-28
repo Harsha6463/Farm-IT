@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import API from "../../API";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "./MyLoans.css";
+import './MyLoans.css';
 
 const MyLoans = () => {
   const [loans, setLoans] = useState([]);
@@ -22,6 +22,40 @@ const MyLoans = () => {
     }
   };
 
+  const handleRepayment = async (loanId, amount, investorId) => {
+    try {
+      const farmerId = localStorage.getItem("farmerId");
+      console.log("Repayment Data:", {
+        loanId,
+        amount,
+        fromUserId: farmerId,
+        toUserId: investorId
+      });
+      const confirmed = window.confirm(`Do you want to repay Rs. ${amount}?`);
+      if (confirmed) {
+        const response = await API.post(`/loans/${loanId}/repay`, {
+          amount: amount,
+          fromUserId: farmerId,
+          toUserId: investorId,
+        });
+
+        if (response.data && response.data.message) {
+          toast.success(response.data.message);
+          fetchLoans();
+        } else {
+          toast.error("Unexpected response format.");
+        }
+      }
+    } catch (error) {
+      console.error("Error making repayment:", error.response ? error.response.data : error.message);
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Failed to make repayment.");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchLoans();
   }, []);
@@ -29,7 +63,7 @@ const MyLoans = () => {
   return (
     <>
       <Navbar UserType={"farmer"} />
-      <div className="farmer-loans">
+      <div style={{ marginTop: "100px" }} className="farmer-loans">
         <div className="dashboard-content">
           <h1>My Loans</h1>
           {loading ? (
@@ -40,13 +74,13 @@ const MyLoans = () => {
                 <div key={loan._id} className="loan-card">
                   <h2>Farm: {loan.farm.name}</h2>
                   <p>
-                    <strong>Amount:</strong> Rs {loan.amount}
+                    <b>Amount:</b> Rs {loan.amount}
                   </p>
                   <p>
-                    <strong>Status:</strong> {loan.status}
+                    <b>Status:</b> {loan.status}
                   </p>
                   <p>
-                    <strong>Repayment Schedule:</strong>
+                    <b>Repayment Schedule:</b>
                   </p>
                   <ul>
                     {loan.repaymentSchedule.map((payment, index) => (
@@ -55,13 +89,30 @@ const MyLoans = () => {
                           {new Date(payment.dueDate).toLocaleDateString()} - (
                           {payment.status})
                         </h3>
-                        <strong>
-                          {" "}
-                          Rs:{" "}
-                          <span className="payment-amount">
-                            {payment.amount}
-                          </span>
-                        </strong>
+                        <b>
+                          Rs: <span className="payment-amount">{payment.amount}</span>
+                        </b>
+
+                        {payment.status === "pending" && (
+                          <button
+                            className="repay-btn"
+                            onClick={() =>
+                              handleRepayment(
+                                loan._id,
+                                payment.amount,
+                                loan.investors[0]?.investor._id 
+                              )
+                            }
+                          >
+                            Repay
+                          </button>
+                        )}
+
+                        {payment.status === "paid" && payment.paidDate && (
+                          <p>
+                            <b>Paid on:</b> {new Date(payment.paidDate).toLocaleDateString()}
+                          </p>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -74,7 +125,7 @@ const MyLoans = () => {
         </div>
       </div>
       <Link to={`/issue/farmer`}>
-        <button className="add-issue-btn">Issue?</button>
+        <button className="issue-btn">Issue?</button>
       </Link>
     </>
   );
