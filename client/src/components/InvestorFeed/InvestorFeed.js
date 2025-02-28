@@ -64,7 +64,7 @@ const InvestorFeed = () => {
               loans.map((loan) => (
                 <div key={loan._id} className="loan-card">
                   <img
-                    src={`http://localhost:3600/${loan.farm?.images || "default-image.jpg"}`} // Handle missing images
+                    src={`http://localhost:3600/${loan.farm?.images || "default-image.jpg"}`} 
                     alt="Farm Land Images"
                     className="loan-image"
                   />

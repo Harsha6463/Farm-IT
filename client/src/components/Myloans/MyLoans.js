@@ -47,12 +47,7 @@ const MyLoans = () => {
         }
       }
     } catch (error) {
-      console.error("Error making repayment:", error.response ? error.response.data : error.message);
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Failed to make repayment.");
-      }
+      toast.error("Error while repay  amount.");
     }
   };
 
