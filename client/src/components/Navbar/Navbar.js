@@ -87,6 +87,13 @@ const Navbar = ({ UserType }) => {
             >
               Issues
             </NavLink>
+            <NavLink
+              to="/Analytics"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Analytics
+            </NavLink>
           </>
         )}
         {UserType === "admin" && (

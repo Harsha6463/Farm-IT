@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { auth } from '../middleware/auth.js';
 import Transaction from '../models/Transaction.js';
+import mongoose from'mongoose';
 
 router.get('/my-transactions', auth, async (req, res) => {
   try {
@@ -20,42 +21,50 @@ router.get('/my-transactions', auth, async (req, res) => {
   }
 });
 
-router.get('/analytics', auth, async (req, res) => {
+router.get("/analytics", auth, async (req, res) => {
   try {
-    const startDate = new Date();
-    startDate.setMonth(startDate.getMonth() - 12);
 
-    const transactions = await Transaction.aggregate([
-      {
-        $match: {
-          $or: [{ from: req.user.userId }, { to: req.user.userId }],
-          createdAt: { $gte: startDate }
-        }
-      },
-      {
-        $group: {
-          _id: {
-            month: { $month: '$createdAt' },
-            year: { $year: '$createdAt' },
-            type: '$type'
-          },
-          total: { $sum: '$amount' },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $sort: {
-          '_id.year': 1,
-          '_id.month': 1
-        }
-      }
+    console.log("User ID:", req.user.userId);
+
+    const userId = new mongoose.Types.ObjectId(req.user.userId);
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+   
+    const investments = await Transaction.aggregate([
+      { $match: { from: userId, type: 'investment' } },
+      { $group: { _id: { $month: "$createdAt" }, totalAmount: { $sum: "$amount" } } },
+      { $sort: { _id: 1 } }
     ]);
 
-    res.json(transactions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+  
+    console.log("Investments:", investments);
+
+
+    const repayments = await Transaction.aggregate([
+      { 
+        $match: { 
+          $or: [{ from: userId }, { to: userId }], 
+          type: 'repayment' 
+        } 
+      },
+      { $group: { _id: { $month: "$createdAt" }, totalAmount: { $sum: "$amount" } } },
+      { $sort: { _id: 1 } }
+    ]);
+
+  
+    console.log("Repayments:", repayments);
+
+    res.json({ investments, repayments });
+  } catch (error) {
+    console.error("Error fetching analytics:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
+ 
+
 
 export default router; 

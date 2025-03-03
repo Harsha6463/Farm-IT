@@ -18,6 +18,8 @@ import UserTransactions from "./components/UserTransactions/UserTransaction";
 import InvestorTracking from "./components/Tracking/InvestorTracking";
 import UserIssues from "./components/UserIssues/UserIssues";
 import MyLoans from "./components/Myloans/MyLoans";
+import Analytics from "./components/Analytics/Analytics";
+
 
 
 
@@ -42,6 +44,8 @@ function App() {
           <Route path="/investorTracking" element={<InvestorTracking />} />
           <Route path="/my-loans" element={<MyLoans />} />
           <Route path="/userTransactions" element={<UserTransactions />} />
+          <Route path="/Analytics" element={<Analytics />} />
+        
           
         
           <Route
