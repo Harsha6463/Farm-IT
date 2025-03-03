@@ -65,7 +65,6 @@ const Analytics = () => {
   const investmentData = analytics.investments.map((inv) => inv.totalAmount);
   const repaymentData = analytics.repayments.map((rep) => rep.totalAmount);
   
-  
   const months = analytics.investments.map((inv) => {
     const monthNumber = inv._id; 
     const monthNames = [
@@ -101,23 +100,33 @@ const Analytics = () => {
         display: true,
         text: "Monthly Investments and Repayments",
       },
+      tooltip: {
+        callbacks: {
+          label: (tooltipItem) => {
+            const datasetLabel = tooltipItem.dataset.label || '';
+            const value = tooltipItem.raw;
+            return `${datasetLabel}: Rs: ${value.toFixed(2)}`;
+          },
+        },
+      },
     },
     scales: {
       x: {
         ticks: {
-          autoSkip: false, 
+          autoSkip: false,
           font: {
-            size: 14, 
-            weight: 'bold', 
+            size: 14,
+            weight: 'bold',
           },
         },
       },
       y: {
         ticks: {
           font: {
-            size: 15, 
-            weight: 'bold', 
+            size: 15,
+            weight: 'bold',
           },
+          callback: (value) => `Rs:${value.toFixed(2)}`,
         },
       },
     },
