@@ -16,3 +16,9 @@ body {
   margin: 0;
 }
 
+#heading2{
+  background-color: aliceblue;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px ;
+}

@@ -32,7 +32,7 @@ const UserTransactions = () => {
       <div className="user-transactions">
         <div style={{marginTop:"100px"}} className="dashboard-content">
           <div className="transactions-title">
-            <h1>My Transactions</h1>
+            <h1 id="heading2">My Transactions</h1>
           </div>
           {loading ? (
             <p className="loading-message">Loading transactions...</p>

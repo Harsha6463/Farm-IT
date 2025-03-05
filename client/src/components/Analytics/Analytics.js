@@ -136,7 +136,7 @@ const Analytics = () => {
     <>
       <Navbar UserType={"investor"} /> 
       <div className="container">
-        <h2>Transaction Analytics</h2>
+        <h2 id="heading2">Transaction Analytics</h2>
         <div className="chartContainer">
           <Bar data={chartData} options={chartOptions} />
         </div>

@@ -57,64 +57,109 @@ const AddFarm = () => {
   return (
     <>
       <Navbar isInvestor={false} />
-      <div className="farm-form-container">
-        <h2 >Add Farm Land</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={farmData.name}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={farmData.description}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={farmData.location}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="farmType"
-            placeholder="Farm Type"
-            value={farmData.farmType}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="number"
-            name="size"
-            placeholder="Size (acres)"
-            value={farmData.size}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="productionCapacity"
-            placeholder="Production Capacity"
-            value={farmData.productionCapacity}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="file"
-            name="images"
-            multiple
-            onChange={handleImageChange}
-          />
-          <button type="submit">Add Farm</button>
-        </form>
+      <div style={{marginTop:"100px"}} className="card">
+        <div className="card-image">
+          <div  className="card-heading">
+            Add Farm Land
+            <small>Add farm details below</small>
+          </div>
+        </div>
+
+        <div className="card-form">
+          <form onSubmit={handleSubmit}>
+            <div className="input">
+              <input
+                type="text"
+                name="name"
+                className="input-field"
+                value={farmData.name}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Farm Name</label>
+            </div>
+
+            <div className="input">
+              <textarea
+                name="description"
+                className="input-field"
+                value={farmData.description}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Description</label>
+            </div>
+
+            <div className="input">
+              <input
+                type="text"
+                name="location"
+                className="input-field"
+                value={farmData.location}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Location</label>
+            </div>
+
+            <div className="input">
+              <input
+                type="text"
+                name="farmType"
+                className="input-field"
+                value={farmData.farmType}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Farm Type</label>
+            </div>
+
+            <div className="input">
+              <input
+                type="number"
+                name="size"
+                className="input-field"
+                value={farmData.size}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Size</label>
+            </div>
+
+            <div className="input">
+              <input
+                type="text"
+                name="productionCapacity"
+                className="input-field"
+                value={farmData.productionCapacity}
+                onChange={handleChange}
+                required
+              />
+              <label className="input-label">Production Capacity</label>
+            </div>
+
+            <div className="input">
+              <input
+                type="file"
+                name="images"
+                className="input-field"
+                multiple
+                onChange={handleImageChange}
+              />
+              <label className="input-label">Farm Images</label>
+            </div>
+
+            <div className="action">
+              <button type="submit" className="action-button">
+                Add Farm
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="card-info">
+          <p>Upload your farm's images and details above.</p>
+        </div>
       </div>
     </>
   );

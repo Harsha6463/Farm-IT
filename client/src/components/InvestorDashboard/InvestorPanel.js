@@ -30,7 +30,7 @@ const InvestorPanel = () => {
       <div className="investor-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-heading">
-            <h1>Investor Dashboard</h1>
+            <h1  id="heading2" style={{marginTop:"100px"}}>Investor Dashboard</h1>
           </div>
 
           {loading ? (

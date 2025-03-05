@@ -35,7 +35,7 @@ const InvestorTracking = () => {
       <Navbar UserType={"investor"} />
       <div className="investor-tracking">
         <div style={{marginTop:"100px"}} className="tracking-title">
-          <h1>Investment Tracking</h1>
+          <h1 id="heading2">Investment Tracking</h1>
         </div>
         {loading ? (
           <p className="loading-message">Loading investments ...</p>

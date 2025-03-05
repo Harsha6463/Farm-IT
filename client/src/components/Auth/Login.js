@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   return (
-    <div className="main-container">
+    <div style={{marginTop:"100px"}} className="main-container">
       <form onSubmit={handleSubmit} className="form-container">
         <h1>Login</h1>
         <input

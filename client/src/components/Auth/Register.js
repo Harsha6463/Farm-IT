@@ -3,7 +3,7 @@ import API from "../../API";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "./auth.css";
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const Register = () => {
   };
 
   return (
-    <div className="main-container">
+    <div style={{marginTop:"100px"}}  className="main-container">
       <form onSubmit={handleSubmit} className="form-container">
         <h1>Register</h1>
         <input

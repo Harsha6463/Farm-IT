@@ -30,7 +30,7 @@ const FarmerDashboard = () => {
       <div className="farmer-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-header-section">
-            <h1 style={{color:"white", marginTop:"90px"}}>Farmer Dashboard</h1>
+            <h1 id="heading2" style={{ marginTop:"90px"}}>Farmer Dashboard</h1>
             <Link to="/addFarm">
               <button style={{color:"white", marginTop:"90px"}} className="add-farm-button">Add Farm Land</button>
             </Link>

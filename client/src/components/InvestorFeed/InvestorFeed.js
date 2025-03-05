@@ -49,9 +49,9 @@ const InvestorFeed = () => {
   return (
     <>
       <Navbar UserType={"investor"} />
-      <div className="investor-container">
+      <div style={{ marginTop: "100px" }}  className="investor-container">
         <div className="header-section">
-          <h1>Investor Feed</h1>
+          <h1 id="heading2" >Investor Feed</h1>
         </div>
 
         {loading ? (
