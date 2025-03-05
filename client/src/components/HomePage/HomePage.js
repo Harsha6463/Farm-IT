@@ -16,6 +16,7 @@ const HomePage = () => {
           <Link to="/register" className="cta-button">
             Get Started
           </Link>
+          <Link to="/login" className="cta-button">Login</Link>
         </div>
       </header>
 
@@ -72,6 +73,7 @@ const HomePage = () => {
         <h2 style={{color:"#007bff"}} className="cta-title">Join Farm IT Today!</h2>
         <p className="passage">Take the first step towards smarter farming with advanced technology and secure investments.</p>
         <Link to="/register" className="cta-button">Get Started</Link>
+        <Link to="/login" className="cta-button">Login</Link>
       </section>
     </div>
     </div>
