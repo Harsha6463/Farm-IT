@@ -5,11 +5,12 @@ import "./HomePage.css";
 const HomePage = () => {
 
   return (
+    <div className="body1">
     <div className="homepage-container">
       <header className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title" style={{color:"#007bff"}}>Welcome to Farm IT</h1>
-          <p className="hero-description">
+          <p style={{color:"black"}} className="hero-description">
             Revolutionizing Agriculture with Technology and Innovation
           </p>
           <Link to="/register" className="cta-button">
@@ -24,22 +25,22 @@ const HomePage = () => {
           <div className="feature-card">
             <div className="feature-icon">🌾</div>
             <h3>Farm Management</h3>
-            <p>Leverage advanced tools to optimize your farm's efficiency and productivity.</p>
+            <p className="passage">Leverage advanced tools to optimize your farm's efficiency and productivity.</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">💰</div>
             <h3>Secure Investments</h3>
-            <p>Partner with investors to secure funds and grow your farming venture.</p>
+            <p className="passage">Partner with investors to secure funds and grow your farming venture.</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">📜</div>
             <h3>Easy Loan Applications</h3>
-            <p>Streamlined process to apply for loans from trusted financial institutions.</p>
+            <p className="passage">Streamlined process to apply for loans from trusted financial institutions.</p>
           </div>
           <div className="feature-card">
             <div className="feature-icon">📊</div>
             <h3>Real-Time Tracking</h3>
-            <p>Track farm activities, performance, and financial progress in real-time.</p>
+            <p className="passage">Track farm activities, performance, and financial progress in real-time.</p>
           </div>
         </div>
       </section>
@@ -72,6 +73,7 @@ const HomePage = () => {
         <p className="passage">Take the first step towards smarter farming with advanced technology and secure investments.</p>
         <Link to="/register" className="cta-button">Get Started</Link>
       </section>
+    </div>
     </div>
   );
 };
