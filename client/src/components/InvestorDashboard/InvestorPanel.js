@@ -7,6 +7,8 @@ import API from "../../API";
 const InvestorPanel = () => {
   const [investments, setInvestments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedInvestment, setSelectedInvestment] = useState(null);
 
   const fetchInvestments = async () => {
     setLoading(true);
@@ -24,13 +26,25 @@ const InvestorPanel = () => {
     fetchInvestments();
   }, []);
 
+  const openPopup = (investment) => {
+    setSelectedInvestment(investment);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedInvestment(null);
+  };
+
   return (
     <>
- <Navbar UserType={"investor"} />
+      <Navbar UserType={"investor"} />
       <div className="investor-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-heading">
-            <h1  id="heading2" style={{marginTop:"100px"}}>Investor Dashboard</h1>
+            <h1 id="heading2" style={{ marginTop: "100px", position: "relative", left: "400px" }}>
+              Investor Dashboard
+            </h1>
           </div>
 
           {loading ? (
@@ -43,29 +57,23 @@ const InvestorPanel = () => {
                 <div key={investment._id} className="investment-card-item">
                   <img
                     src={
-                      investment.farm?.images?.[0] 
+                      investment.farm?.images?.[0]
                         ? `http://localhost:3600/${investment.farm.images[0]}`
-                    : "default-image.jpg" 
+                        : "default-image.jpg"
                     }
                     alt="Farm Land"
                     className="investment-card-image"
                   />
-                  <h2 className="investment-farm-title"><b>Name : </b>{investment.farm?.name}</h2>
-                  <p className="investment-farm-description">
-                  <b>Farm : </b>{investment.farm?.description}
-                  </p>
-                  <p>
-                    <b>Location :</b> {investment.farm?.location}
-                  </p>
-                  <p>
-                    <b>Investment Amount :</b> Rs:{investment.amount}
-                  </p>
-                  <p>
-                    <b>Farmer :</b> {investment.farm?.farmer}
-                  </p>
-                  <p>
-                    <b>Status :</b> {investment.status}
-                  </p>
+                  <h2 className="investment-farm-title">
+                    <b>Name : </b>{investment.farm?.name}
+                  </h2>
+                 
+                  <p><b>Investment Amount :</b> Rs:{investment.amount}</p>
+                
+                  <p><b>Status :</b> {investment.status}</p>
+                  <button onClick={() => openPopup(investment)} className="view-details-btn">
+                    Dashboard Details...
+                  </button>
                 </div>
               ))}
             </div>
@@ -77,6 +85,22 @@ const InvestorPanel = () => {
           <button className="report-issue-btn">Report an Issue</button>
         </Link>
       </div>
+
+  
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-container">
+            <button className="close-popup-btn" onClick={closePopup}>X</button>
+            <h2 style={{color:"white"}}>Investment Details</h2>
+            <p><b>Name:</b> {selectedInvestment.farm?.name}</p>
+            <p><b>Farm Description:</b> {selectedInvestment.farm?.description}</p>
+            <p><b>Location:</b> {selectedInvestment.farm?.location}</p>
+            <p><b>Investment Amount:</b> Rs:{selectedInvestment.amount}</p>
+            <p><b>Farmer:</b> {selectedInvestment.farm?.farmer}</p>
+            <p><b>Status:</b> {selectedInvestment.status}</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -118,7 +118,7 @@ const InvestorTracking = () => {
         <div className="modal-overlay">
           <div className="modal">
             <button className="close-btn" onClick={closeModal}>X</button>
-            <h2>{selectedInvestment.farm.name}</h2>
+            <h2 style={{color:"white"}}>{selectedInvestment.farm.name}</h2>
             <p>
               <b>Description:</b> {selectedInvestment.farm.description}
             </p>
