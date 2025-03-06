@@ -50,21 +50,21 @@ const InvestorPanel = () => {
                     alt="Farm Land"
                     className="investment-card-image"
                   />
-                  <h2 className="investment-farm-title">{investment.farm?.name}</h2>
+                  <h2 className="investment-farm-title"><b>Name : </b>{investment.farm?.name}</h2>
                   <p className="investment-farm-description">
-                    {investment.farm?.description}
+                  <b>Farm : </b>{investment.farm?.description}
                   </p>
                   <p>
-                    <b>Location:</b> {investment.farm?.location}
+                    <b>Location :</b> {investment.farm?.location}
                   </p>
                   <p>
-                    <b>Investment Amount:</b> Rs:{investment.amount}
+                    <b>Investment Amount :</b> Rs:{investment.amount}
                   </p>
                   <p>
-                    <b>Farmer:</b> {investment.farm?.farmer}
+                    <b>Farmer :</b> {investment.farm?.farmer}
                   </p>
                   <p>
-                    <b>Status:</b> {investment.status}
+                    <b>Status :</b> {investment.status}
                   </p>
                 </div>
               ))}

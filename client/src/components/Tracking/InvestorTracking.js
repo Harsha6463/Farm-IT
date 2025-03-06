@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./InvestorTracking.css";
 import Navbar from "../Navbar/Navbar";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import API from "../../API";
+
+import "./InvestorTracking.css";
 
 const InvestorTracking = () => {
   const [investments, setInvestments] = useState([]);
@@ -12,6 +13,8 @@ const InvestorTracking = () => {
     activeInvestments: 0,
   });
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedInvestment, setSelectedInvestment] = useState(null);
 
   const fetchInvestments = async () => {
     setLoading(true);
@@ -30,15 +33,24 @@ const InvestorTracking = () => {
     fetchInvestments();
   }, []);
 
+  const handleViewDetails = (investment) => {
+    setSelectedInvestment(investment);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedInvestment(null);
+  };
+
   return (
     <>
       <Navbar UserType={"investor"} />
       <div className="investor-tracking">
-        <div style={{marginTop:"100px"}} className="tracking-title">
-          <h1 id="heading2">Investment Tracking</h1>
-        </div>
+        <h1 className="tracking-title">Investment Tracking</h1>
+
         {loading ? (
-          <p className="loading-message">Loading investments ...</p>
+          <p className="loading-message">Loading investments...</p>
         ) : (
           <>
             <div className="stats-card">
@@ -52,39 +64,79 @@ const InvestorTracking = () => {
                 <b>Active Investments:</b> {stats.activeInvestments}
               </p>
             </div>
-            <div className="investment-tracking-list">
-              {investments.length > 0 ? (
-                investments.map((investment) => (
-                  <div key={investment._id} className="investment-card">
-                    <h2>Farm: {investment.farm.name}</h2>
-                    <p>
-                      <b>Amount Invested:</b> Rs {investment.amount}
-                    </p>
-                    <p>
-                      <b>Interest Rate:</b> {investment.interestRate}%
-                    </p>
-                    <p>
-                      <b>Start Date:</b>{" "}
-                      {new Date(investment.startDate).toLocaleDateString()}
-                    </p>
-                    <p>
-                      <b>Status:</b> {investment.status}
-                    </p>
-                    <p>
-                      <b>Returns:</b> Rs {investment.returns}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p className="no-investments">No investments found.</p>
-              )}
+
+            <div className="investment-table-container">
+              <table className="investment-table">
+                <thead>
+                  <tr>
+                    <th>Farm Name</th>
+                    <th>Start Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {investments.length > 0 ? (
+                    investments.map((investment) => (
+                      <tr key={investment._id}>
+                        <td>{investment.farm.name}</td>
+                        <td>
+                          {new Date(investment.startDate).toLocaleDateString()}
+                        </td>
+                        <td>
+                          <span className={`status ${investment.status.toLowerCase()}`}>
+                            {investment.status}
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => handleViewDetails(investment)}
+                            className="view-details-btn1"
+                          >
+                            Tracking Details
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4">No investments found.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </>
         )}
       </div>
+
       <NavLink to={`/issue/investor`}>
-        <button className="report-issue-btn">Issue?</button>
+        <button className="report-issue-btn">Report An Issue</button>
       </NavLink>
+
+      {isModalOpen && selectedInvestment && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <button className="close-btn" onClick={closeModal}>X</button>
+            <h2>{selectedInvestment.farm.name}</h2>
+            <p>
+              <b>Description:</b> {selectedInvestment.farm.description}
+            </p>
+            <p>
+              <b>Amount Invested:</b> Rs {selectedInvestment.amount}
+            </p>
+            <p>
+              <b>Interest Rate:</b> {selectedInvestment.interestRate}%
+            </p>
+            <p>
+              <b>Start Date:</b> {new Date(selectedInvestment.startDate).toLocaleDateString()}
+            </p>
+            <p>
+              <b>Status:</b> {selectedInvestment.status}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -2,23 +2,17 @@
   text-align: center;
 }
 b{
-  color:rgb(206, 47, 47);
+  color:rgb(28, 97, 225);
+  font-size: 1.27rem;
 }
  
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("../public/farm2.jpeg");
+  background-image: url("../public/farm22.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   height: 100vh;
   margin: 0;
-}
-
-#heading2{
-  background-color: aliceblue;
-  padding: 10px;
-  display: inline-block;
-  border-radius: 10px ;
 }

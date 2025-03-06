@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import API from "../../API";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import './MyLoans.css';
+import {  NavLink } from "react-router-dom";
+import "./MyLoans.css";
+
 
 const MyLoans = () => {
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedLoan, setSelectedLoan] = useState(null);
 
   const fetchLoans = async () => {
     setLoading(true);
@@ -15,7 +17,6 @@ const MyLoans = () => {
       const response = await API.get("/loans/my-loans");
       setLoans(response.data);
     } catch (error) {
-      console.error("Error fetching loans:", error);
       toast.error("Failed to load loans");
     } finally {
       setLoading(false);
@@ -23,31 +24,25 @@ const MyLoans = () => {
   };
 
   const handleRepayment = async (loanId, amount, investorId) => {
-    try {
-      const farmerId = localStorage.getItem("farmerId");
-      console.log("Repayment Data:", {
-        loanId,
-        amount,
-        fromUserId: farmerId,
-        toUserId: investorId
-      });
-      const confirmed = window.confirm(`Do you want to repay Rs. ${amount}?`);
-      if (confirmed) {
+    const farmerId = localStorage.getItem("farmerId");
+    const confirmed = window.confirm(`Do you want to repay Rs. ${amount}?`);
+    if (confirmed) {
+      try {
         const response = await API.post(`/loans/${loanId}/repay`, {
-          amount: amount,
+          amount,
           fromUserId: farmerId,
           toUserId: investorId,
         });
 
-        if (response.data && response.data.message) {
+        if (response.data?.message) {
           toast.success(response.data.message);
           fetchLoans();
         } else {
           toast.error("Unexpected response format.");
         }
+      } catch {
+        toast.error("Error while repaying amount.");
       }
-    } catch (error) {
-      toast.error("Error while repay  amount.");
     }
   };
 
@@ -58,70 +53,104 @@ const MyLoans = () => {
   return (
     <>
       <Navbar UserType={"farmer"} />
-      <div style={{ marginTop: "100px" }} className="farmer-loans">
-        <div className="dashboard-content">
-          <h1 id="heading2">My Loans</h1>
-          {loading ? (
-            <p className="loading-message">Loading loans...</p>
-          ) : loans.length > 0 ? (
-            <div className="loan-list">
-              {loans.map((loan) => (
-                <div key={loan._id} className="loan-card">
-                  <h2>Farm: {loan.farm.name}</h2>
-                  <p>
-                    <b>Amount:</b> Rs {loan.amount}
-                  </p>
-                  <p>
-                    <b>Status:</b> {loan.status}
-                  </p>
-                  <p>
-                    <b>Repayment Schedule:</b>
-                  </p>
-                  <ul>
-                    {loan.repaymentSchedule.map((payment, index) => (
-                      <li key={index}>
-                        <h3>
-                          {new Date(payment.dueDate).toLocaleDateString()} - (
-                          {payment.status})
-                        </h3>
-                        <b>
-                          Rs: <span className="payment-amount">{payment.amount}</span>
-                        </b>
+      <div style={{ marginTop: "70px" }} className="farmer-loans">
+        <h1 className="title">My Loans</h1>
 
-                        {payment.status === "pending" && (
-                          <button
-                            className="repay-btn"
-                            onClick={() =>
-                              handleRepayment(
-                                loan._id,
-                                payment.amount,
-                                loan.investors[0]?.investor._id 
-                              )
-                            }
-                          >
-                            Repay
-                          </button>
-                        )}
+        {loading ? (
+          <p className="loading">Loading loans...</p>
+        ) : loans.length > 0 ? (
+          <div className="loan-table-container">
+            <table className="loan-table">
+              <thead>
+                <tr>
+                  <th>Farm Name</th>
+                  <th>Loan Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loans.map((loan) => (
+                  <tr key={loan._id}>
+                    <td>{loan.farm.name}</td>
+                    <td>Rs {loan.amount.toLocaleString()}</td>
+                    <td>
+                      <span className={`status ${loan.status.toLowerCase()}`}>
+                        {loan.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        className="view-btn"
+                        onClick={() => setSelectedLoan(loan)}
+                      >
+                        Repayment Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="no-loans">No loans found.</p>
+        )}
 
-                        {payment.status === "paid" && payment.paidDate && (
-                          <p>
-                            <b>Paid on:</b> {new Date(payment.paidDate).toLocaleDateString()}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+<NavLink to={`/issue/farmer`}>
+        <button className="report-issue-btn"> Report an Issue?</button>
+      </NavLink>
+
+        {selectedLoan && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <button
+                className="close-btn"
+                onClick={() => setSelectedLoan(null)}
+              >
+                X
+              </button>
+              <h2 style={{ color: "white" }}>{selectedLoan.farm.name}</h2>
+              <p>
+                <b>Loan Amount:</b> Rs {selectedLoan.amount.toLocaleString()}
+              </p>
+              <p>
+                <b>Status:</b> {selectedLoan.status}
+              </p>
+              <h3>Repayment Schedule:</h3>
+              <ul>
+                {selectedLoan.repaymentSchedule.map((payment, index) => (
+                  <li key={index} className="repayment-item">
+                    <p>
+                      <b>Due Date:</b>{" "}
+                      {new Date(payment.dueDate).toLocaleDateString()}
+                    </p>
+                    <p>
+                      <b>Amount:</b> Rs {payment.amount.toLocaleString()}
+                    </p>
+                    <p>
+                      <b>Status:</b> {payment.status}
+                    </p>
+                    {payment.status === "pending" && (
+                      <button
+                        className="repay-btn"
+                        onClick={() =>
+                          handleRepayment(
+                            selectedLoan._id,
+                            payment.amount,
+                            selectedLoan.investors[0]?.investor._id
+                          )
+                        }
+                      >
+                        Repay
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : (
-            <p className="no-loans">No loans found.</p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-      <Link to={`/issue/farmer`}>
-        <button className="issue-btn">Issue?</button>
-      </Link>
     </>
   );
 };

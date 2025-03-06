@@ -1,12 +1,11 @@
-.investor-container {
+.investor-feed {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-.header-section {
+.dashboard-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +13,8 @@
   width: 100%;
   max-width: 1200px;
 }
-.loan-cards-container {
+
+.farm-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -23,12 +23,12 @@
   max-width: 1200px;
 }
 
-.loan-card {
-  background: white;
+.farm-card {
+  background: cornsilk;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
-  width: 500px;
+  width: 354px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   text-align: left;
@@ -37,28 +37,28 @@
   align-items: flex-start;
 }
 
-.loan-card:hover {
+.farm-card:hover {
   transform: scale(1.02);
 }
 
-.loan-status {
+.farm-name {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.loan-card p {
+.farm-card p {
   margin: 5px 0;
 }
 
-.no-loans-message {
+.no-farms {
   font-size: 18px;
   color: #888;
   text-align: center;
   margin-top: 20px;
 }
 
-.loan-image {
+.farm-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -66,10 +66,12 @@
   margin-bottom: 10px;
 }
 
-.invest-btn {
+.interested-btn {
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: black;
   color: white;
+  width: 140px;
+  height: 50px;
   border: none;
   cursor: pointer;
   border-radius: 4px;
@@ -80,27 +82,28 @@
   font-size: 16px;
 }
 
+.interested-btn:hover {
+  background-color: rgb(48, 48, 48);
+}
 
-.loading-text {
+.loading-message {
   font-size: 30px;
   font-weight: 500;
 }
-
-.issue-btn {
+.report-issue-btn {
   padding: 0.5rem 1rem;
   background-color: red;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-top: 10px;
   text-decoration: none;
   display: inline-block;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   position: fixed;
-  right: 40px;
+  right: 15px;
   bottom: 30px;
+  transition: background 0.3s ease;
 }
-
-

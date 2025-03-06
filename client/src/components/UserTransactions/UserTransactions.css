@@ -1,68 +1,141 @@
+
 .user-transactions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .transactions-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .transactions-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .transaction-card {
-    background:cornsilk;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    width: 350px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
-  .transaction-card h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .no-transactions {
-    font-size: 18px;
-    color: #888;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .loading-message {
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-  }
-  .report-issue-btn {
-    padding: 0.5rem 1rem;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 500;
-    font-size: 18px;
-    position: fixed;
-    right: 15px;
-    bottom: 30px;
-    transition: background 0.3s ease;
-  }  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+
+.transactions-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+.transactions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+.transaction-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+.report-issue-btn {
+  padding: 0.5rem 1rem;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 18px;
+  position: fixed;
+  right: 15px;
+  bottom: 30px;
+  transition: background 0.3s ease;
+} 
+.transaction-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.transaction-type {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+
+.transaction-detail {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+
+.transaction-status {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.transaction-status.completed {
+  color: #28a745;
+}
+
+.transaction-status.pending {
+  color: #ffc107;
+}
+
+.transaction-status.failed {
+  color: #dc3545;
+}
+
+
+.transaction-date {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+
+.no-transactions {
+  font-size: 20px;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+.loading-message {
+  font-size: 22px;
+  font-weight: 500;
+  color: #007bff;
+  text-align: center;
+}
+
+
+.floating-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #ff4d4d;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-button:hover {
+  background: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* Issue Icon */
+.issue-icon {
+  font-size: 24px;
+}

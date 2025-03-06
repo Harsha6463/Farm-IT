@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./UserTransactions.css";
 import Navbar from "../Navbar/Navbar";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import API from "../../API";
 
 const UserTransactions = () => {
@@ -29,37 +29,31 @@ const UserTransactions = () => {
   return (
     <>
       <Navbar UserType={"farmer"} />
-      <div className="user-transactions">
-        <div style={{marginTop:"100px"}} className="dashboard-content">
-          <div className="transactions-title">
-            <h1 id="heading2">My Transactions</h1>
-          </div>
+      <div style={{marginTop:"80px" }} className="user-transactions">
+        <div className="dashboard-content">
+          <h1 style={{fontStyle:"bold",fontSize:"3rem", color:"crimson"}} className="transactions-title">My Transactions</h1>
           {loading ? (
             <p className="loading-message">Loading transactions...</p>
           ) : (
-            <div className="transactions-list">
+            <div className="transactions-grid">
               {transactions.length > 0 ? (
                 transactions.map((transaction) => (
                   <div key={transaction._id} className="transaction-card">
-                    <h2>Type: {transaction.type}</h2>
-                    <p>
-                      <b>Amount:</b> Rs{" "}
-                      {transaction.amount.toFixed(2)}
+                    <h3 className="transaction-type">{transaction.type}</h3>
+                    <p className="transaction-detail">
+                      <b>Amount:</b> Rs {transaction.amount.toFixed(2)}
                     </p>
-                    <p>
-                      <b>From:</b> {transaction.from.firstName}{" "}
-                      {transaction.from.lastName}
+                    <p className="transaction-detail">
+                      <b>From:</b> {transaction.from.firstName} {transaction.from.lastName}
                     </p>
-                    <p>
-                      <b>To:</b> {transaction.to.firstName}{" "}
-                      {transaction.to.lastName}
+                    <p className="transaction-detail">
+                      <b>To:</b> {transaction.to.firstName} {transaction.to.lastName}
                     </p>
-                    <p>
+                    <p className={`transaction-status ${transaction.status}`}>
                       <b>Status:</b> {transaction.status}
                     </p>
-                    <p>
-                      <b>Date:</b>{" "}
-                      {new Date(transaction.createdAt).toLocaleDateString()}
+                    <p className="transaction-date">
+                      <b>Date:</b> {new Date(transaction.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                 ))
@@ -70,8 +64,10 @@ const UserTransactions = () => {
           )}
         </div>
       </div>
+      
+    
       <NavLink to={`/issue/${userType}`}>
-        <button className="report-issue-btn">Issue?</button>
+        <button className="report-issue-btn">Report an Issue</button>
       </NavLink>
     </>
   );

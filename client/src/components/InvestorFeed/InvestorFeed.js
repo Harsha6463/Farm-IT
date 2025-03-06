@@ -49,38 +49,39 @@ const InvestorFeed = () => {
   return (
     <>
       <Navbar UserType={"investor"} />
-      <div style={{ marginTop: "100px" }}  className="investor-container">
-        <div className="header-section">
-          <h1 id="heading2" >Investor Feed</h1>
+      <div className="investor-feed">
+        <div className="dashboard-title">
+          <h1>Investor Feed</h1>
         </div>
 
         {loading ? (
-          <p className="loading-text">
+          <p className="loading-message">
             <b>Loading loan requests...</b>
           </p>
         ) : (
-          <div className="loan-cards-container">
+          <div className="farm-list">
             {loans.length > 0 ? (
               loans.map((loan) => (
-                <div key={loan._id} className="loan-card">
+                <div key={loan._id} className="farm-card">
                   <img
-                    src={`http://localhost:3600/${loan.farm?.images || "default-image.jpg"}`} 
-                    alt="Farm Land Images"
-                    className="loan-image"
+                    src={`http://localhost:3600/${loan.farm.images}`}
+                    alt="Farm Land Pictures"
+                    className="farm-image"
                   />
-                  <h2 className="loan-status"><b>Status:</b> {loan.status}</h2>
+                  <h2 className="farm-name"><b>Status:</b> {loan.status}</h2>
                   <p>
                     <b>Amount:</b> {loan.amount}
                   </p>
                   <p>
-                    <b>Requested Interest Rate:</b> {loan.interestRate}
+                    <b>Requested Interest Rate:</b>{" "}
+                    {loan.interestRate}
                   </p>
                   <p>
                     <b>Duration:</b> {loan.duration}
                   </p>
                   <Link to="">
                     <button
-                      className="invest-btn"
+                      className="interested-btn"
                       onClick={() =>
                         acceptLoanRequest(
                           loan.amount,
@@ -95,12 +96,12 @@ const InvestorFeed = () => {
                 </div>
               ))
             ) : (
-              <h3 className="no-loans-message">No loans available to fund.</h3>
+              <p className="no-farms">No farms available to fund.</p>
             )}
           </div>
         )}
         <Link to={`/issue/investor`}>
-          <button className="issue-btn">Issue?</button>
+          <button className="report-issue-btn">Issue?</button>
         </Link>
       </div>
     </>
