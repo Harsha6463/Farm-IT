@@ -6,6 +6,8 @@ import "./AdminUsersDashboard.css";
 const AdminUsersDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     fetchUsers();
@@ -31,9 +33,25 @@ const AdminUsersDashboard = () => {
           user._id === userId ? { ...user, isVerified: true } : user
         )
       );
+      if (selectedUser._id === userId) {
+        setSelectedUser((prevUser) => ({
+          ...prevUser,
+          isVerified: true,
+        }));
+      }
     } catch (error) {
       console.error("Error while verifying user:", error);
     }
+  };
+
+  const openPopup = (user) => {
+    setSelectedUser(user);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedUser(null);
   };
 
   return (
@@ -53,29 +71,18 @@ const AdminUsersDashboard = () => {
                   key={user._id}
                   className="user-card"
                   style={{
-                    backgroundColor: user.isVerified ? "#e0ffa3" : "cornsilk", 
+                    backgroundColor: user.isVerified ? "#e0ffa3" : "cornsilk",
                   }}
                 >
-                  <h2>
-                    {user.firstName} {user.lastName}
-                  </h2>
-                  <p>
-                    <b>Email:</b> {user.email}
-                  </p>
-                  <p>
-                    <b>Role:</b> {user.role}
-                  </p>
-                  <p>
-                    <b>Verified:</b> {user.isVerified ? "Yes" : "No"}
-                  </p>
-                  {!user.isVerified && (
-                    <button
-                      className="verify-btn"
-                      onClick={() => verifyUser(user._id)}
-                    >
-                      Verify User
-                    </button>
-                  )}
+                  <h2>{user.firstName} {user.lastName}</h2>
+                  <p><b>Email:</b> {user.email}</p>
+                  <p><b>Role:</b> {user.role}</p>
+                  <button
+                    className="view-details-btn"
+                    onClick={() => openPopup(user)}
+                  >
+                    User Details
+                  </button>
                 </div>
               ))}
             </div>
@@ -84,6 +91,27 @@ const AdminUsersDashboard = () => {
           )}
         </div>
       </div>
+
+      {showPopup && selectedUser && (
+        <div className="popup-overlay">
+          <div className="popup-container">
+            <button className="close-popup-btn" onClick={closePopup}>X</button>
+            <h2 style={{color:"blue"}}>User Details</h2>
+            <p><b>Name:</b> {selectedUser.firstName} {selectedUser.lastName}</p>
+            <p><b>Email:</b> {selectedUser.email}</p>
+            <p><b>Role:</b> {selectedUser.role}</p>
+            <p><b>Verified:</b> {selectedUser.isVerified ? "Yes" : "No"}</p>
+            {!selectedUser.isVerified && (
+              <button
+                className="verify-btn"
+                onClick={() => verifyUser(selectedUser._id)}
+              >
+                Verify User
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };

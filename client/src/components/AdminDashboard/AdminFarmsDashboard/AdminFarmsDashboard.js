@@ -42,7 +42,7 @@ const AdminFarmsDashboard = () => {
                     alt="Farm"
                     className="farm-card-image"
                   />
-                  <h2>{farm.name}</h2>
+                  <h2><b>🌾</b>{farm.name}</h2>
                   <p>
                     <b>Farmer:</b> {farm.farmer.firstName}{" "}
                     {farm.farmer.lastName}

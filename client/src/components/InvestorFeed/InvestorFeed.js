@@ -139,6 +139,7 @@ const InvestorFeed = () => {
                 <b>Duration:</b> {selectedLoan.duration}
               </p>
               <button
+              style={{backgroundColor:"white",color:"black"}}
                 className="interested-btn"
                 onClick={() =>
                   acceptLoanRequest(

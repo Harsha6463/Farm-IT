@@ -92,6 +92,7 @@ const InvestorTracking = () => {
                           <button
                             onClick={() => handleViewDetails(investment)}
                             className="view-details-btn1"
+                            style={{backgroundColor:"black",color:"white", fontSize:"0.94rem"}}
                           >
                             Tracking Details
                           </button>

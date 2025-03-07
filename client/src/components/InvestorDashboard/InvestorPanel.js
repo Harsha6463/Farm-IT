@@ -67,9 +67,6 @@ const InvestorPanel = () => {
                   <h2 className="investment-farm-title">
                     <b>Name : </b>{investment.farm?.name}
                   </h2>
-                 
-                  <p><b>Investment Amount :</b> Rs:{investment.amount}</p>
-                
                   <p><b>Status :</b> {investment.status}</p>
                   <button onClick={() => openPopup(investment)} className="view-details-btn">
                     Dashboard Details...

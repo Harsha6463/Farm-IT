@@ -11,7 +11,7 @@ const Navbar = ({ UserType }) => {
   };
 
   const activeNavLink = (isActive) => ({
-    backgroundColor: isActive ? "crimson" : "transparent",
+    backgroundColor: isActive ? "blue" : "transparent",
     color: "white",
     borderRadius: isActive ? "6px" : "none",
   });

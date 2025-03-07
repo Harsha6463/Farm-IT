@@ -241,9 +241,6 @@
   cursor: pointer
 }
 
-.view-details-btn:hover {
-  background-color: #45a049;
-}
 
 .floating-button {
   position: fixed;
