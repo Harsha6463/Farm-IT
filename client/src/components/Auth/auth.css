@@ -103,3 +103,9 @@
 .select-input option {
   color: #333;
 }
+.passwordicon{
+  position: relative;
+  bottom: 58px;
+  left: 150px;
+  font-size: 18px;
+}
