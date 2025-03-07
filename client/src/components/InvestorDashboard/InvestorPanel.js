@@ -42,7 +42,7 @@ const InvestorPanel = () => {
       <div className="investor-dashboard-container">
         <div className="dashboard-inner-content">
           <div className="dashboard-heading">
-            <h1 id="heading2" style={{ marginTop: "100px", position: "relative", left: "400px" }}>
+            <h1 className="title" style={{ marginTop: "100px", position: "relative", left: "400px" }}>
               Investor Dashboard
             </h1>
           </div>

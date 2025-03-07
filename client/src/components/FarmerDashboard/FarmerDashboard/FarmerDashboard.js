@@ -29,7 +29,7 @@ const FarmerDashboard = () => {
       <Navbar UserType="farmer" />
       <div className="farmer-dashboard-container">
         <div className="dashboard-header-section">
-          <h1 style={{ fontSize: "2.7rem", fontWeight: "bold", marginTop: "90px", textAlign:"center",marginLeft:"250px" }}>
+          <h1  style={{ fontSize: "2.7rem", fontWeight: "bold", marginTop: "90px", textAlign:"center",marginLeft:"250px" }}>
             🚜 Farmer Dashboard
           </h1>
           <Link to="/addFarm">

@@ -30,7 +30,7 @@ const UserIssues = () => {
       <Navbar UserType={userType} />
       <div className="user-issues-container">
         <div style={{marginTop:"100px"}} className="user-issues-content">
-          <h1 id="heading2" >Your Reported Issues</h1>
+          <h1 className="title">Your Reported Issues</h1>
           {loading ? (
             <p className="loading-message">
               <b>Loading issues...</b>

@@ -64,15 +64,17 @@ const InvestorFeed = () => {
       <div style={{ marginTop: "100px" }} className="investor-feed">
         <div className="dashboard-title">
           <h1
-            style={{
-              position: "relative",
-              left: "500px",
-              background: "white",
-              padding: "10px",
-              borderRadius: "10px",
-            }}
+           className="title"
+           style={{
+            position: "relative",
+            left: "500px",
+            top: "20px",
+           
+          }
+          }
           >
             Investor Feed
+           
           </h1>
         </div>
 

@@ -47,7 +47,7 @@ const InvestorTracking = () => {
     <>
       <Navbar UserType={"investor"} />
       <div className="investor-tracking">
-        <h1 className="tracking-title">Investment Tracking</h1>
+        <h1 className="title">Investment Tracking</h1>
 
         {loading ? (
           <p className="loading-message">Loading investments...</p>
@@ -92,9 +92,9 @@ const InvestorTracking = () => {
                           <button
                             onClick={() => handleViewDetails(investment)}
                             className="view-details-btn1"
-                            style={{backgroundColor:"black",color:"white", fontSize:"0.94rem"}}
+                            style={{backgroundColor:"black",color:"white", fontSize:"1.25rem"}}
                           >
-                            Tracking Details
+                            Tracking 
                           </button>
                         </td>
                       </tr>

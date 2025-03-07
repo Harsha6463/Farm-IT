@@ -31,7 +31,7 @@ const UserTransactions = () => {
       <Navbar UserType={"farmer"} />
       <div style={{marginTop:"80px" }} className="user-transactions">
         <div className="dashboard-content">
-          <h1 style={{fontStyle:"bold",fontSize:"3rem", color:"crimson"}} className="transactions-title">My Transactions</h1>
+          <h1  className="title">My Transactions</h1>
           {loading ? (
             <p className="loading-message">Loading transactions...</p>
           ) : (
