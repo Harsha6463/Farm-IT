@@ -14,7 +14,7 @@ const Navbar = () => {
         <li><span className="navbar-link">About</span></li>
         <li><span className="navbar-link">Contact</span></li>
         <li className="navbar-dropdown">
-          <button className="navbar-link">Login/Register</button>
+          <button className="navbar-link">Account</button>
           <ul className="dropdown-menu">
             <li><Link to="/login" className="dropdown-item">Login</Link></li>
             <li><Link to="/register" className="dropdown-item">Sign Up</Link></li>

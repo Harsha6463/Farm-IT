@@ -24,8 +24,8 @@ body {
 .add-farm-button,
 .request-loan-button {
   padding: 14px 22px;
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
-  color: white;
+  background: linear-gradient(135deg, #80e461, #9edea2);
+
   border: none;
   border-radius: 10px;
   font-size: 1rem;

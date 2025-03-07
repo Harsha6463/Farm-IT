@@ -33,7 +33,7 @@ const FarmerDashboard = () => {
             🚜 Farmer Dashboard
           </h1>
           <Link to="/addFarm">
-            <button style={{position:"relative", top:"40px"}} className="add-farm-button">+ Add Farm Land</button>
+            <button style={{position:"relative", top:"40px"}} className="add-farm-button">🌾 Add Farm Land</button>
           </Link>
         </div>
 
