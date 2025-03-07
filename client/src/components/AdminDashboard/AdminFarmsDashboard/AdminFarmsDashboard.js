@@ -28,7 +28,7 @@ const AdminFarmsDashboard = () => {
       <Navbar UserType={"admin"} />
       <div className="admin-farm-dashboard">
         <div className="farm-dashboard-content">
-          <h1 id="heading2" style={{marginTop:"100px"}}>Admin Farms Dashboard</h1>
+          <h1 className="title"style={{marginTop:"120px"}}>Admin Farms Dashboard</h1>
           {loading ? (
             <p className="loading-text">
               <b>Loading farms...</b>

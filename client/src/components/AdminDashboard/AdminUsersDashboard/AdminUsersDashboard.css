@@ -63,9 +63,7 @@ h1#heading2 {
   margin-top: 12px;
 }
 
-.view-details-btn:hover {
-  background-color: #5a54e7;
-}
+
 
 .popup-overlay {
   position: fixed;
