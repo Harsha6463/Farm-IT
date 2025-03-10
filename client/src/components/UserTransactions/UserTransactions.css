@@ -1,141 +1,125 @@
-
-.user-transactions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.transactions-page {
   padding: 30px;
-  min-height: 100vh;
+  text-align: center;
 }
 
-
-.transactions-title {
-  font-size: 28px;
+.title {
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #333;
+  color: #222;
   margin-bottom: 20px;
-  text-align: center;
 }
 
-
-.transactions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-}
-
-
-.transaction-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-}
-.report-issue-btn {
-  padding: 0.5rem 1rem;
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 500;
-  font-size: 18px;
-  position: fixed;
-  right: 15px;
-  bottom: 30px;
-  transition: background 0.3s ease;
-} 
-.transaction-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-.transaction-type {
-  font-size: 20px;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 10px;
-}
-
-
-.transaction-detail {
-  font-size: 16px;
-  color: #555;
-  margin: 5px 0;
-}
-
-
-.transaction-status {
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.transaction-status.completed {
-  color: #28a745;
-}
-
-.transaction-status.pending {
-  color: #ffc107;
-}
-
-.transaction-status.failed {
-  color: #dc3545;
-}
-
-
-.transaction-date {
-  font-size: 14px;
-  color: #888;
-  margin-top: 5px;
-}
-
-
-.no-transactions {
-  font-size: 20px;
-  color: #888;
-  text-align: center;
+.loading, .no-transactions {
+  font-size: 1.4rem;
+  color: #777;
   margin-top: 20px;
 }
 
-
-.loading-message {
-  font-size: 22px;
-  font-weight: 500;
-  color: #007bff;
-  text-align: center;
+.filter-buttons {
+  margin-bottom: 20px;
 }
 
-
-.floating-button {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #ff4d4d;
+.filter-buttons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
   color: white;
-  padding: 15px;
-  border-radius: 50%;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: 0.3s ease-in-out;
 }
 
-.floating-button:hover {
-  background: #d32f2f;
-  transform: scale(1.1);
+.filter-buttons button:hover {
+  background-color: #0056b3;
 }
 
-/* Issue Icon */
-.issue-icon {
-  font-size: 24px;
+.transactions-table-container {
+  overflow-x: auto;
+  margin: 20px auto;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.transactions-table th, .transactions-table td {
+  padding: 16px;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.transactions-table th {
+  background-color: #2c3e50;
+  color: white;
+  text-transform: uppercase;
+}
+
+.transactions-table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.transactions-table tr:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  width: 130px;
+}
+
+.status.investment { background-color: rgb(23, 120, 232); color: white; }
+.status.repayment { background-color: #28a745; color: white; }
+
+.view-btn, .repay-btn {
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+.view-btn { background-color: #007bff; color: white; }
+.view-btn:hover { background-color: #0056b3; }
+
+.repay-btn { background-color: #28a745; color: white; }
+.repay-btn:hover { background-color: #218838; }
+
+.no-transactions-message {
+  font-size: 1.4rem;
+  color: #777;
+  margin-top: 20px;
+}
+
+.transaction-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.transaction-item:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .transactions-table {
+    font-size: 1rem;
+  }
+
+  .filter-buttons button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
 }

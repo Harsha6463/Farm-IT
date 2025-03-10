@@ -1,14 +1,14 @@
 import express from 'express';
 const router = express.Router();
-import { auth } from '../middleware/auth.js';
+import { auth, checkRole } from '../middleware/auth.js';
 import Transaction from '../models/Transaction.js';
 import mongoose from'mongoose';
 
 router.get('/my-transactions', auth, async (req, res) => {
   try {
-    const transactions = await Transaction.find({
-      $or: [{ from: req.user.userId }, { to: req.user.userId }]
-    })
+    const { type } = req.query; 
+    const filter = type ? { transactionType: type } : {};
+    const transactions = await Transaction.find(filter)
       .populate('loan', 'amount interestRate')
       .populate('from', 'firstName lastName')
       .populate('to', 'firstName lastName')

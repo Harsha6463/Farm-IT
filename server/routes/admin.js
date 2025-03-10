@@ -4,6 +4,7 @@ import { auth, checkRole } from '../middleware/auth.js';
 import User from '../models/User.js';
 import Farm from '../models/Farm.js';
 import Loan from '../models/Loan.js';
+import Transaction from '../models/Transaction.js';
 
 router.get('/users', [auth, checkRole(['admin'])], async (req, res) => {
   try {
@@ -44,6 +45,57 @@ router.get('/farms', [auth, checkRole(['admin'])], async (req, res) => {
   try {
     const farms = await Farm.find().populate('farmer');
     res.json(farms);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+router.get('/:id/investments', [auth, checkRole(['admin'])], async (req, res) => {
+  try {
+ console.log(loans)
+    const loans = await Transaction.findById({ farm: req.params.id })
+      .populate('farm')
+      .populate('investors.investor', '-password'); 
+console.log(loans)
+    if (!loans || loans.length === 0) {
+      return res.status(404).json({ message: 'No loans found for this farm' });
+    }
+    const investmentsList = Transaction.map(loan => {
+      return {
+        loanId: loan._id,
+        farm: loan.farm.name,
+        totalAmount: loan.amount,
+        status: loan.status,
+        investments: loan.investors.map(investment => ({
+          investorId: investment.investor._id,
+          investorName: investment.investor.name,
+          investorEmail: investment.investor.email,
+          amountInvested: investment.amount,
+        }))
+      };
+    });
+console.log(investmentsList)
+    res.json(investmentsList);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+router.get('/my-transactions', [auth, checkRole(['admin'])], async (req, res) => {
+  try {
+    const { type } = req.query;  // 'type' could be 'investment' or 'repayment'
+
+    // Build the query filter based on the type (if provided)
+    const filter = type ? { transactionType: type } : {};
+
+    // Fetch all transactions based on the filter
+    const transactions = await Transaction.find(filter)
+      .populate('loan', 'amount interestRate')
+      .populate('from', 'firstName lastName')
+      .populate('to', 'firstName lastName')
+      .sort('-createdAt');
+
+    res.json(transactions);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

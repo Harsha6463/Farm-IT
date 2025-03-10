@@ -3,18 +3,13 @@ import mongoose from "mongoose";
 const transactionSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ["investment", "repayment", "withdrawal"],
+    enum: ["investment", "repayment","withdrawal"],
     required: true,
   },
   amount: {
     type: Number,
     required: true,
   },
-  // loan: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Loan',
-  //   required: true
-  // },
   loan: { type: mongoose.Schema.Types.ObjectId, ref: "Loan", required: true },
   from: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from "react";
-import "./UserTransactions.css";
-import Navbar from "../Navbar/Navbar";
-import { NavLink } from "react-router-dom";
-import API from "../../API";
+import React, { useState, useEffect } from 'react';
+import API from '../../API';
+import './UserTransactions.css';
+import Navbar from '../Navbar/Navbar';
 
-const UserTransactions = () => {
+const TransactionsPage = () => {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [userType, setUserType] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchTransactions = async () => {
-    setLoading(true);
     try {
-      const { data } = await API.get("/transactions/my-transactions");
-      setTransactions(data);
-      setUserType(data.role);
-    } catch (error) {
-      console.error("Error fetching transactions:", error);
+      setLoading(true);
+      const response = await API.get('/transactions/my-transactions', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      setTransactions(response.data);
+    } catch (err) {
+      setError('Failed to load transactions');
     } finally {
       setLoading(false);
     }
@@ -27,50 +29,54 @@ const UserTransactions = () => {
   }, []);
 
   return (
-    <>
-      <Navbar UserType={"farmer"} />
-      <div style={{marginTop:"80px" }} className="user-transactions">
-        <div className="dashboard-content">
-          <h1  className="title">My Transactions</h1>
-          {loading ? (
-            <p className="loading-message">Loading transactions...</p>
-          ) : (
-            <div className="transactions-grid">
-              {transactions.length > 0 ? (
-                transactions.map((transaction) => (
-                  <div key={transaction._id} className="transaction-card">
-                    <h3 className="transaction-type">{transaction.type}</h3>
-                    <p className="transaction-detail">
-                      <b>Amount:</b> Rs {transaction.amount.toFixed(2)}
-                    </p>
-                    <p className="transaction-detail">
-                      <b>From:</b> {transaction.from.firstName} {transaction.from.lastName}
-                    </p>
-                    <p className="transaction-detail">
-                      <b>To:</b> {transaction.to.firstName} {transaction.to.lastName}
-                    </p>
-                    <p className={`transaction-status ${transaction.status}`}>
-                      <b>Status:</b> {transaction.status}
-                    </p>
-                    <p className="transaction-date">
-                      <b>Date:</b> {new Date(transaction.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p className="no-transactions">No transactions found.</p>
-              )}
-            </div>
-          )}
+    <div className="transactions-page">
+      <Navbar UserType={"admin"}></Navbar>
+      <h1 className="title">Transactions History</h1>
+      {loading && <p className="loading">Loading...</p>}
+      {error && <p className="loading" style={{ color: 'red' }}>{error}</p>}
+      {transactions && transactions.length > 0 ? (
+        <div className="transactions-table-container">
+          <table className="transactions-table">
+            <thead>
+              <tr>
+                <th>Loan Amount</th>
+                <th>Interest Rate</th>
+                <th>From (Investor)</th>
+                <th>To (Borrower)</th>
+                <th>Transaction Amount</th>
+                <th>Transaction Type</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.map((transaction) => {
+                const loan = transaction.loan;
+                const loanAmount = loan ? loan.amount : 'N/A';
+                const interestRate = loan ? loan.interestRate : 'N/A';
+                return (
+                  <tr key={transaction._id}>
+                    <td>{loanAmount}</td>
+                    <td>{interestRate}%</td>
+                    <td>{transaction.from.firstName} {transaction.from.lastName}</td>
+                    <td>{transaction.to.firstName} {transaction.to.lastName}</td>
+                    <td>{transaction.amount}</td>
+                    <td>
+                      <span className={`status ${transaction.type === 'investment' ? 'investment' : 'repayment'}`}>
+                        {transaction.type === 'investment' ? 'Investment' : 'Repayment'}
+                      </span>
+                    </td>
+                    <td>{new Date(transaction.createdAt).toLocaleString()}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-      </div>
-      
-    
-      <NavLink to={`/issue/${userType}`}>
-        <button className="report-issue-btn">Report an Issue</button>
-      </NavLink>
-    </>
+      ) : (
+        <p className="no-transactions-message">No transactions found</p>
+      )}
+    </div>
   );
 };
 
-export default UserTransactions;
+export default TransactionsPage;

@@ -14,6 +14,7 @@ const InvestorFeed = () => {
   const [selectedLoan, setSelectedLoan] = useState(null);
   const navigate = useNavigate();
 
+
   const getLoans = async () => {
     setLoading(true);
     try {
@@ -31,16 +32,19 @@ const InvestorFeed = () => {
     getLoans();
   }, []);
 
+
   const acceptLoanRequest = async (loanAmount, loanId, farmerId) => {
     try {
+     
       await API.post(`/loans/${loanId}/invest`, {
         amount: loanAmount,
         toUserId: farmerId,
         fromUserId: investorId,
+        status: "Pending Approval", 
       });
 
-      toast.success("Loan amount sent successfully!");
-      navigate("/investorDashboard");
+      toast.success("Loan sent for admin approval!");
+      navigate("/investorDashboard"); 
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Error submitting loan request"
@@ -48,6 +52,7 @@ const InvestorFeed = () => {
     }
   };
 
+  
   const handleViewDetails = (loan) => {
     setSelectedLoan(loan);
     setPopupOpen(true);
@@ -58,23 +63,21 @@ const InvestorFeed = () => {
     setSelectedLoan(null);
   };
 
+
   return (
     <>
       <Navbar UserType={"investor"} />
-      <div style={{ marginTop: "100px" }} className="investor-feed">
+      <div style={{ marginTop: "80px" }} className="investor-feed">
         <div className="dashboard-title">
           <h1
-           className="title"
-           style={{
-            position: "relative",
-            left: "500px",
-            top: "20px",
-           
-          }
-          }
+            className="title"
+            style={{
+              position: "relative",
+              left: "500px",
+              top: "20px",
+            }}
           >
             Investor Feed
-           
           </h1>
         </div>
 
@@ -127,7 +130,7 @@ const InvestorFeed = () => {
               <button className="close-popup-btn" onClick={closePopup}>
                 X
               </button>
-              <h2 style={{color:"white"}}>{selectedLoan.farm.name}</h2>
+              <h2 style={{ color: "white" }}>{selectedLoan.farm.name}</h2>
               <p>
                 <b>Status:</b> {selectedLoan.status}
               </p>
@@ -141,7 +144,7 @@ const InvestorFeed = () => {
                 <b>Duration:</b> {selectedLoan.duration}
               </p>
               <button
-              style={{backgroundColor:"white",color:"black"}}
+                style={{ backgroundColor: "white", color: "black" }}
                 className="interested-btn"
                 onClick={() =>
                   acceptLoanRequest(

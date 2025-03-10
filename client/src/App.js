@@ -19,6 +19,9 @@ import InvestorTracking from "./components/Tracking/InvestorTracking";
 import UserIssues from "./components/UserIssues/UserIssues";
 import MyLoans from "./components/Myloans/MyLoans";
 import Analytics from "./components/Analytics/Analytics";
+import DocumentsUpload from "./components/Documents/DocumentsUpload";
+import MyDocuments from "./components/Documents/MyDocuments";
+
 
 
 
@@ -45,9 +48,8 @@ function App() {
           <Route path="/my-loans" element={<MyLoans />} />
           <Route path="/userTransactions" element={<UserTransactions />} />
           <Route path="/Analytics" element={<Analytics />} />
-        
-          
-        
+          <Route path="/documents" element={<DocumentsUpload />} />
+          <Route path="/my-documents" element={<MyDocuments />} />
           <Route
             path="/adminUsersDashboard"
             element={<AdminUsersDashboard />}

@@ -47,6 +47,16 @@ router.get("/available", [auth, checkRole(["investor"])], async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// Fetch loans that are pending approval
+router.get("/loans/pending-approval", [auth, checkRole(["admin"])], async (req, res) => {
+  try {
+    const loans = await Loan.find({ status: "Pending Approval" });
+    res.status(200).json({ loans });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching pending loans", error });
+  }
+});
+
 
 router.post("/", [auth, checkRole(["farmer"])], async (req, res) => {
   try {
@@ -134,6 +144,8 @@ router.post(
     }
   }
 );
+
+
 
 router.post("/:id/repay", [auth, checkRole(["farmer"])], async (req, res) => {
   try {

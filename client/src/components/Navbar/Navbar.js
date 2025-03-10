@@ -41,12 +41,20 @@ const Navbar = ({ UserType }) => {
               My-Loans
             </NavLink>
             <NavLink
-              to="/userTransactions"
+              to="/documents"
               className="nav-item"
               style={({ isActive }) => activeNavLink(isActive)}
             >
-              Transactions
+              Upload Documents
             </NavLink>
+            <NavLink
+              to="/my-documents"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              MyDocuments
+            </NavLink>
+           
             <NavLink
               to="/userissues"
               className="nav-item"
@@ -105,6 +113,7 @@ const Navbar = ({ UserType }) => {
             >
               Users
             </NavLink>
+      
             <NavLink
               to="/adminFarmsDashboard"
               className="nav-item"
@@ -125,6 +134,13 @@ const Navbar = ({ UserType }) => {
               style={({ isActive }) => activeNavLink(isActive)}
             >
               Issues
+            </NavLink>
+            <NavLink
+              to="/userTransactions"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              Transactions
             </NavLink>
           </>
         )}

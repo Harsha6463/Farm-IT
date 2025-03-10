@@ -39,6 +39,9 @@ const AdminLoansDashboard = () => {
                 <div key={loan._id} className="loan-card">
                   <h2>Farm: {loan.farm ? loan.farm.name : "No farm name available"}</h2>
                   <p>
+                    <b>Loan Id:</b> Rs {loan._id}
+                  </p>
+                  <p>
                     <b>Amount:</b> Rs {loan.amount}
                   </p>
                   <p>
