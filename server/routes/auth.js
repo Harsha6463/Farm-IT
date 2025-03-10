@@ -42,7 +42,10 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-
+   if(["farmer","investor"].includes(user.role)&& user.isVerified== false){
+    return res.status(400).json({ message: "Admin has  to verify your Account " });
+   }
+  
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
