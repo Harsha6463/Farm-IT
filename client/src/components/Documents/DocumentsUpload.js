@@ -83,8 +83,8 @@ console.log(response)
             required
             className="upload-select"
           >
-            <option value="farm_certificate">Farm Certificate</option>
-            <option value="loan_agreement">Loan Agreement</option>
+            <option value="farm_certificate">Farm Passbook</option>
+            <option value="loan_agreement">Bank Details</option>
             <option value="identity_proof">Identity Proof</option>
             <option value="other">Other</option>
           </select>
