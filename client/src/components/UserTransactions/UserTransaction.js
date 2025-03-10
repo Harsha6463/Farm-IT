@@ -30,8 +30,8 @@ const TransactionsPage = () => {
 
   return (
     <div className="transactions-page">
-      <Navbar UserType={"admin"}></Navbar>
-      <h1 className="title">Transactions History</h1>
+      <Navbar UserType={"admin"} />
+      <h1 style={{marginTop:"80px"}} className="title">Transactions History</h1>
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="loading" style={{ color: 'red' }}>{error}</p>}
       {transactions && transactions.length > 0 ? (
@@ -39,10 +39,11 @@ const TransactionsPage = () => {
           <table className="transactions-table">
             <thead>
               <tr>
+                <th>Transaction ID</th> 
                 <th>Loan Amount</th>
                 <th>Interest Rate</th>
                 <th>From (Investor)</th>
-                <th>To (Borrower)</th>
+                <th>To (Farmer)</th>
                 <th>Transaction Amount</th>
                 <th>Transaction Type</th>
                 <th>Date</th>
@@ -55,6 +56,7 @@ const TransactionsPage = () => {
                 const interestRate = loan ? loan.interestRate : 'N/A';
                 return (
                   <tr key={transaction._id}>
+                    <td>{transaction._id}</td> {/* Display the Transaction ID */}
                     <td>{loanAmount}</td>
                     <td>{interestRate}%</td>
                     <td>{transaction.from.firstName} {transaction.from.lastName}</td>
