@@ -59,4 +59,25 @@ router.put('/change-password', auth, async (req, res) => {
 });
 
 
+// router.delete('/:id/delete', auth, async (req, res) => {
+//   try {
+//     const userToDelete = await User.findById(req.params.id);
+//     if (!userToDelete) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     if (req.user.role !== 'admin' && req.user.userId !== req.params.id) {
+//       return res.status(403).json({ message: 'Not authorized to delete this user' });
+//     }
+
+//     await User.findByIdAndDelete(req.params.id);
+
+//     res.json({ message: 'User deleted successfully' });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// });
+
+
 export default router;

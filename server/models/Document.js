@@ -29,7 +29,11 @@ const documentSchema = new mongoose.Schema({
   uploadedAt: {
     type: Date,
     default: Date.now
+  },
+  isVerified: {
+    type: Boolean,
+    default: false  
   }
 });
 
-export default mongoose.model('Document', documentSchema); 
+export default mongoose.model('Document', documentSchema);

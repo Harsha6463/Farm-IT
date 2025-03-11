@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = ({ UserType }) => {
@@ -54,7 +55,6 @@ const Navbar = ({ UserType }) => {
             >
               MyDocuments
             </NavLink>
-           
             <NavLink
               to="/userissues"
               className="nav-item"
@@ -62,7 +62,12 @@ const Navbar = ({ UserType }) => {
             >
               Issues
             </NavLink>
-            
+            <NavLink
+              to="/profile"
+              className="nav-item"
+            >
+              <FaUserCircle size={25} />
+            </NavLink>
           </>
         )}
         {UserType === "investor" && (
@@ -113,7 +118,6 @@ const Navbar = ({ UserType }) => {
             >
               Users
             </NavLink>
-      
             <NavLink
               to="/adminFarmsDashboard"
               className="nav-item"
@@ -141,6 +145,13 @@ const Navbar = ({ UserType }) => {
               style={({ isActive }) => activeNavLink(isActive)}
             >
               Transactions
+            </NavLink>
+            <NavLink
+              to="/userDocuments"
+              className="nav-item"
+              style={({ isActive }) => activeNavLink(isActive)}
+            >
+              User Documents
             </NavLink>
           </>
         )}

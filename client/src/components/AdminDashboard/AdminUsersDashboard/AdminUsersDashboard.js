@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../Navbar/Navbar";
 import API from "../../../API";
+import { ToastContainer, toast } from "react-toastify";
 import "./AdminUsersDashboard.css";
 
 const AdminUsersDashboard = () => {
@@ -39,8 +40,22 @@ const AdminUsersDashboard = () => {
           isVerified: true,
         }));
       }
+      toast.success("User verified successfully!");
     } catch (error) {
       console.error("Error while verifying user:", error);
+      toast.error("Failed to verify user.");
+    }
+  };
+
+  const deleteUser = async (userId) => {
+    try {
+      await API.delete(`/admin/deleteUser/${userId}`);
+      setUsers(users.filter((user) => user._id !== userId));
+      toast.success("User deleted successfully!");
+      closePopup();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Failed to delete user.");
     }
   };
 
@@ -56,6 +71,7 @@ const AdminUsersDashboard = () => {
 
   return (
     <>
+      <ToastContainer />
       <Navbar UserType={"admin"} />
       <div className="admin-dashboard">
         <div className="dashboard-content">
@@ -83,6 +99,7 @@ const AdminUsersDashboard = () => {
                   >
                     User Details
                   </button>
+                  
                 </div>
               ))}
             </div>
@@ -96,7 +113,7 @@ const AdminUsersDashboard = () => {
         <div className="popup-overlay">
           <div className="popup-container">
             <button className="close-popup-btn" onClick={closePopup}>X</button>
-            <h2 style={{color:"blue"}}>User Details</h2>
+            <h2 style={{ color: "blue" }}>User Details</h2>
             <p><b>Name:</b> {selectedUser.firstName} {selectedUser.lastName}</p>
             <p><b>Email:</b> {selectedUser.email}</p>
             <p><b>Role:</b> {selectedUser.role}</p>
@@ -109,6 +126,12 @@ const AdminUsersDashboard = () => {
                 Verify User
               </button>
             )}
+            <button
+              className="delete-btn"
+              onClick={() => deleteUser(selectedUser._id)}
+            >
+              Delete User
+            </button>
           </div>
         </div>
       )}

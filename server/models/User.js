@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  firstName:{
+  firstName: {
     type: String,
     required: true,
   },
@@ -27,10 +27,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  profilePic: {
+    type: String,  
+    default: '',
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   }
 });
 
-export default mongoose.model('User', userSchema); 
+export default mongoose.model('User', userSchema);

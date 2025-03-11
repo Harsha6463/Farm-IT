@@ -47,15 +47,7 @@ router.get("/available", [auth, checkRole(["investor"])], async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-// Fetch loans that are pending approval
-router.get("/loans/pending-approval", [auth, checkRole(["admin"])], async (req, res) => {
-  try {
-    const loans = await Loan.find({ status: "Pending Approval" });
-    res.status(200).json({ loans });
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching pending loans", error });
-  }
-});
+
 
 
 router.post("/", [auth, checkRole(["farmer"])], async (req, res) => {
@@ -256,5 +248,75 @@ function generateRepaymentSchedule(amount, interestRate, duration) {
 
   return schedule;
 }
+router.get("/pending-investments", [auth, checkRole(["admin"])], async (req, res) => {
+  try {
+    const loans = await Loan.find({ "investors.status": "pending" })
+      .populate({
+        path: "investors.investor",
+        select: "name email",
+      })
+      .populate("farm", "name location");
 
+    res.status(200).json(loans);
+  } catch (error) {
+    console.error("Error fetching pending investments:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// Verify Investment
+router.post("/verify-investment", [auth, checkRole(["admin"])], async (req, res) => {
+  try {
+    const { loanId, investorId } = req.body;
+    const loan = await Loan.findById(loanId);
+    if (!loan) return res.status(404).json({ message: "Loan not found" });
+
+    const investor = loan.investors.find(inv => inv.investor.toString() === investorId);
+    if (!investor) return res.status(404).json({ message: "Investor not found" });
+
+    if (investor.status !== "pending") {
+      return res.status(400).json({ message: "Investment already processed" });
+    }
+
+    investor.status = "verified";
+    await loan.save();
+
+    res.status(200).json({ message: "Investment verified successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// Credit Investment
+router.post("/credit-investment", [auth, checkRole(["admin"])], async (req, res) => {
+  try {
+    const { loanId, investorId } = req.body;
+    const loan = await Loan.findById(loanId).populate("farm");
+    if (!loan) return res.status(404).json({ message: "Loan not found" });
+
+    const investor = loan.investors.find(inv => inv.investor.toString() === investorId);
+    if (!investor) return res.status(404).json({ message: "Investor not found" });
+
+    if (investor.status !== "verified") {
+      return res.status(400).json({ message: "Investment must be verified before crediting" });
+    }
+
+    investor.status = "credited";
+
+    await Transaction.create({
+      loan: loan._id,
+      from: investor.investor,
+      to: loan.farm.farmer,
+      amount: investor.amount,
+      type: "investment",
+      date: new Date(),
+    });
+
+    await loan.save();
+
+    res.status(200).json({ message: "Investment credited successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
 export default router;

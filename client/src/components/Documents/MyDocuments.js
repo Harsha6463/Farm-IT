@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../../API";
 import './Document.css';
 import Navbar from "../Navbar/Navbar";
+import { toast } from 'react-toastify';
 
 const MyDocuments = () => {
   const [documents, setDocuments] = useState([]);
@@ -14,7 +15,7 @@ const MyDocuments = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("Please log in first.");
+        toast.error("Please log in first.");
         return;
       }
 
@@ -23,7 +24,7 @@ const MyDocuments = () => {
       setDocuments(response.data);
     } catch (error) {
       console.error(error);
-      alert("Failed to fetch documents");
+      toast.error("Failed to fetch documents");
     }
   };
 
@@ -33,17 +34,17 @@ const MyDocuments = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("Please log in first.");
+        toast.error("Please log in first.");
         return;
       }
 
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await API.delete(`/documents/${id}`, config);
-      alert("Document deleted successfully!");
-      fetchDocuments();
+      toast.success("Document deleted successfully!");
+      fetchDocuments(); // Re-fetch documents after deletion
     } catch (error) {
       console.error("Error deleting document:", error);
-      alert(error.response?.data?.message || "Failed to delete document");
+      toast.error(error.response?.data?.message || "Failed to delete document");
     }
   };
 
@@ -60,6 +61,8 @@ const MyDocuments = () => {
               <th>Title</th>
               <th>Type</th>
               <th>Uploaded</th>
+              <th>ID</th>
+              <th>Status</th> 
               <th>Actions</th>
             </tr>
           </thead>
@@ -69,6 +72,10 @@ const MyDocuments = () => {
                 <td>{doc.title}</td>
                 <td>{doc.type}</td>
                 <td>{new Date(doc.uploadedAt).toLocaleDateString()}</td>
+                <td>{doc._id}</td>
+                <td style={{ color: doc.isVerified ? 'green' : 'red' }}>
+                  {doc.isVerified ? "Verified" : "Not Verified"}
+                </td> {/* Conditional inline CSS for color */}
                 <td>
                   <a
                     href={`http://localhost:3600/${doc.filePath}`}

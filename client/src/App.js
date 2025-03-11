@@ -21,6 +21,8 @@ import MyLoans from "./components/Myloans/MyLoans";
 import Analytics from "./components/Analytics/Analytics";
 import DocumentsUpload from "./components/Documents/DocumentsUpload";
 import MyDocuments from "./components/Documents/MyDocuments";
+import UserProfile from "./components/Profile/UserProfile";
+import GetDocuments from "./components/AdminDashboard/AdminDocuments/GetDocumets";
 
 
 
@@ -50,6 +52,8 @@ function App() {
           <Route path="/Analytics" element={<Analytics />} />
           <Route path="/documents" element={<DocumentsUpload />} />
           <Route path="/my-documents" element={<MyDocuments />} />
+          <Route path="/profile" element={<UserProfile></UserProfile>} />
+          <Route path="/userDocuments" element={<GetDocuments></GetDocuments>} />
           <Route
             path="/adminUsersDashboard"
             element={<AdminUsersDashboard />}

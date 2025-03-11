@@ -5,6 +5,7 @@ import User from '../models/User.js';
 import Farm from '../models/Farm.js';
 import Loan from '../models/Loan.js';
 import Transaction from '../models/Transaction.js';
+import Document from '../models/Document.js';
 
 router.get('/users', [auth, checkRole(['admin'])], async (req, res) => {
   try {
@@ -30,6 +31,35 @@ router.put('/users/:id/verify', [auth, checkRole(['admin'])], async (req, res) =
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.get('/documents', [auth, checkRole(['admin'])], async (req, res) => {
+  try {
+    const documents = await Document.find();
+    res.json(documents);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.put('/documents/:id/verify', [auth, checkRole(['admin'])], async (req, res) => {
+  try {
+    const document = await Document.findByIdAndUpdate(
+      req.params.id,
+      { isVerified: true },
+      { new: true }
+    );
+
+    if (!document) {
+      return res.status(404).json({ message: 'Document not found' });
+    }
+
+    res.json(document);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 router.get('/loans', [auth, checkRole(['admin'])], async (req, res) => {
   try {
@@ -83,12 +113,11 @@ console.log(investmentsList)
 });
 router.get('/my-transactions', [auth, checkRole(['admin'])], async (req, res) => {
   try {
-    const { type } = req.query;  // 'type' could be 'investment' or 'repayment'
+    const { type } = req.query;  
 
-    // Build the query filter based on the type (if provided)
+   
     const filter = type ? { transactionType: type } : {};
 
-    // Fetch all transactions based on the filter
     const transactions = await Transaction.find(filter)
       .populate('loan', 'amount interestRate')
       .populate('from', 'firstName lastName')
@@ -99,6 +128,19 @@ router.get('/my-transactions', [auth, checkRole(['admin'])], async (req, res) =>
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.delete('/deleteUser/:id', [auth, checkRole(['admin'])], async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 

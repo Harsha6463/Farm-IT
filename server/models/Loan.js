@@ -20,8 +20,15 @@ const loanSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "active", "completed", "defaulted"],
+    enum: ["pending", "approved", "rejected", "active", "completed", "defaulted"],
     default: "pending",
+  },
+  rejectionReason: {
+    type: String,
+    required: function() {
+      return this.status === "rejected"; 
+    },
+    trim: true,
   },
   repaymentSchedule: [
     {
